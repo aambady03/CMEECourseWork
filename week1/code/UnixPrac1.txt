@@ -1,0 +1,24 @@
+#!/bin/bash
+
+#  navigate into directory with FASTA file
+cd /home/anaga-ambady/Documents/CMEECourseWork/week1/data
+
+# count the number of lines in FASTA file
+wc -l *.fasta 
+
+# print everything from line 2 for E.coli genome
+tail -n +2 E.coli.fasta 
+
+ # count section of sequence
+ tail -n +2 E.coli.fasta  | tr -d '\n' | wc -c
+
+
+# find matches to ATGC in e-coli
+tail -n +2 E.coli.fasta  | tr -d '\n' | grep -c ATCG E.coli.fasta | wc -l
+
+#compute AT/GC ratio
+#find how many A| grep -c A,C E.coli.fasta
+#find how many G
+                                      
+A_COUNT=$(echo $SEQUENCE | grep -o "A" | wc -l)                             
+G_COUNT=$(echo $SEQUENCE | grep -o "G" | wc -l)
