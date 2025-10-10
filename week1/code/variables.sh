@@ -10,20 +10,18 @@
 # Special variables
 
 echo "This script was called with $# parameters"
-echo "The script's name is $0"
+echo "The script's name is $0".
 echo "The arguments are $1 and $2".
 echo "The first argument is $1 and "
-echo "The second argument is $2".
+echo "the second argument is $2".
 
 # Assigned Variables; Explicit declaration:
 MY_VAR='some string' 
-echo 'the current value of the variable is:' $MY_VAR
+echo 'The current value of the variable is:' $MY_VAR
 echo
 echo 'Please enter a new string'
 read MY_VAR
-echo
-echo 'the current value of the variable is:' $MY_VAR
-echo
+
 
 ## Assigned Variables; Reading (multiple values) from user input:
 echo 'Enter two numbers separated by space(s)'
