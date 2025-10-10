@@ -5,28 +5,39 @@
 # Usage: 
 # Date: Oct 2025
 
-# count the number of lines in FASTA file
+# 1. count the number of lines in FASTA file
 wc -l ../data/fasta/*.fasta 
 
-# print everything from line 2 for E.coli genome
+# 2. print everything for E.coli genome (skip header)
 tail -n +2 ../data/fasta/E.coli.fasta 
 
-# count section of sequence
+# 3. count section of sequence
 tail -n +2 ../data/fasta/E.coli.fasta  | tr -d '\n' | wc -c
 
 
-# find matches to ATGC in e-coli
+# 4. count occurances of ATGC in e-coli sequences
 tail -n +2 ../data/fasta/E.coli.fasta  | tr -d '\n' | grep -oi ATCG | wc -l
 
-# Extract sequence without header
+# 5. Extract sequence (no header or newline)
 SEQUENCE=$(tail -n +2 ../data/fasta/E.coli.fasta | tr -d '\n')
 
-#find how many A & T bases. according to the Chargaff’s rule
-#find how many C & G bases. according to the Chargaff’s rule  
-#compute AT/GC ratio 
-tail -n +2 ../data/fasta/E.coli.fasta | tr -d '\n' | grep -o '[A]' | wc -l 
-tail -n +2 ../data/fasta/E.coli.fasta | tr -d '\n' | grep -o '[C]' | wc -l 
+# 6. count the number of 'A' and 'T' Bases > Chargaff's first pair 
+A_COUNT=$(echo "$SEQUENCE" | grep -o 'A' | wc -l)
+T_COUNT=$(echo "$SEQUENCE" | grep -o 'T' | wc -l)
 
-                                  
-                       
+# 7. count the number of 'C' and 'G' Bases > Chargaff's first pair 
+G_COUNT=$(echo "$SEQUENCE" | grep -o 'G' | wc -l)
+C_COUNT=$(echo "$SEQUENCE" | grep -o 'C' | wc -l)
+
+# 8. calvulate sums
+AT_COUNT=$((A_COUNT + T_COUNT))
+GC_COUNT=$((G_COUNT + C_COUNT))
+
+# 9. compute AT/GC ratio 
+if [ "$GC_COUNT" -gt 0 ]; then
+    RATIO=$(echo "scale=2; $AT_COUNT / $GC_COUNT" | bc)
+    echo "AT/GC ratio: $RATIO"
+else
+    echo "GC count is zero, cannot compute ratio."
+fi
 
