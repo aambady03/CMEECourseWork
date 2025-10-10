@@ -1,24 +1,32 @@
-#!/bin/bash
-
-#  navigate into directory with FASTA file
-cd /home/anaga-ambady/Documents/CMEECourseWork/week1/data
+#!/bin/sh
+# Author: Anaga Ambady anaga.ambady25@imperial.ac.uk
+# Script: UnixPrac1.txt
+# Description: FASTA file analysis
+# Usage: 
+# Date: Oct 2025
 
 # count the number of lines in FASTA file
-wc -l *.fasta 
+wc -l ../data/fasta/*.fasta 
 
 # print everything from line 2 for E.coli genome
-tail -n +2 E.coli.fasta 
+tail -n +2 ../data/fasta/E.coli.fasta 
 
- # count section of sequence
- tail -n +2 E.coli.fasta  | tr -d '\n' | wc -c
+# count section of sequence
+tail -n +2 ../data/fasta/E.coli.fasta  | tr -d '\n' | wc -c
 
 
 # find matches to ATGC in e-coli
-tail -n +2 E.coli.fasta  | tr -d '\n' | grep -c ATCG E.coli.fasta | wc -l
+tail -n +2 ../data/fasta/E.coli.fasta  | tr -d '\n' | grep -oi ATCG | wc -l
 
-#compute AT/GC ratio
-#find how many A| grep -c A,C E.coli.fasta
-#find how many G
-                                      
-A_COUNT=$(echo $SEQUENCE | grep -o "A" | wc -l)                             
-G_COUNT=$(echo $SEQUENCE | grep -o "G" | wc -l)
+# Extract sequence without header
+SEQUENCE=$(tail -n +2 ../data/fasta/E.coli.fasta | tr -d '\n')
+
+#find how many A & T bases. according to the Chargaff’s rule
+#find how many C & G bases. according to the Chargaff’s rule  
+#compute AT/GC ratio 
+tail -n +2 ../data/fasta/E.coli.fasta | tr -d '\n' | grep -o '[A]' | wc -l 
+tail -n +2 ../data/fasta/E.coli.fasta | tr -d '\n' | grep -o '[C]' | wc -l 
+
+                                  
+                       
+
