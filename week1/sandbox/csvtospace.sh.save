@@ -1,0 +1,33 @@
+#!/bin/bash
+# Author: Your Name
+# Script: csvtospace.sh
+# Description: Converts a comma-separated file to space-separated
+# Usage: bash csvtospace.sh <input.csv>
+# Date: Oct 2024
+
+# Check if user provided an input file
+if [ $# -eq 0 ]; then
+    echo "Error: No input file provided!"
+    echo "Usage: bash csvtospace.sh <input_file.csv>"
+    exit 1
+fi
+
+# Store the input filename
+INPUT=$1
+
+# Check if the file exists
+if [ ! -f "$INPUT" ]; then
+    echo "Error: File '$INPUT' not found!"
+    exit 1
+fi
+
+# Create output filename by changing .csv to .txt
+OUTPUT="${INPUT%.csv}.txt"
+
+# Convert commas to spaces and save to new file
+cat "$INPUT" | tr ',' ' ' > "$OUTPUT"
+
+# Print success message
+echo "Success!"
+echo "Converted: $INPUT"
+echo "Created:   $OUTPUT"
