@@ -1,5 +1,14 @@
 #!/usr/bin/env python3
-"""DNA sequence alignment programme"""
+
+"""DNA sequence alignment programme
+
+This script takes an input for 2 DNA sequences and then finds the alignment with the 
+greatest number of matched alignments.
+
+Author: Anaga Ambady (aa6725@ic.ac.uk)
+Version: 1.0.0
+Date: Oct 2025
+"""
 import csv, os
 
 def calculate_score(s1, s2, l1, l2, startpoint):
