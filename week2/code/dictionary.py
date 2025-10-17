@@ -1,3 +1,14 @@
+#!/usr/bin/env python3
+
+"""Taxanomic data in dictionaries
+
+and list comprehensions.
+
+Author: Anaga Ambady (aa6725@ic.ac.uk)
+Version: 1.0.0
+Date: Oct 2025
+"""
+
 taxa = [ ('Myotis lucifugus','Chiroptera'),
          ('Gerbillus henleyi','Rodentia',),
          ('Peromyscus crinitus', 'Rodentia'),
@@ -10,7 +21,7 @@ taxa = [ ('Myotis lucifugus','Chiroptera'),
          ('Canis lupus', 'Carnivora'),
         ]
 
-# Write a python script to populate a dictionary called taxa_dic derived from
+# 1.Write a python script to populate a dictionary called taxa_dic derived from
 # taxa so that it maps order names to sets of taxa and prints it to screen.
 # 
 taxa = { ('Myotis lucifugus','Chiroptera'),
@@ -40,8 +51,26 @@ for order, species_set in taxa_dict.items():
         print(f"'{order}': {species_set}")
       
 
-#### Your solution here #### 
+# 2.Now write a list comprehension that does the same (including the printing after the dictionary has been created)  
 
-# Now write a list comprehension that does the same (including the printing after the dictionary has been created)  
  
-#### Your solution here #### 
+taxa = [ ('Myotis lucifugus','Chiroptera'),
+         ('Gerbillus henleyi','Rodentia',),
+         ('Peromyscus crinitus', 'Rodentia'),
+         ('Mus domesticus', 'Rodentia'),
+         ('Cleithrionomys rutilus', 'Rodentia'),
+         ('Microgale dobsoni', 'Afrosoricida'),
+         ('Microgale talazaci', 'Afrosoricida'),
+         ('Lyacon pictus', 'Carnivora'),
+         ('Arctocephalus gazella', 'Carnivora'),
+         ('Canis lupus', 'Carnivora'),
+]
+
+# List comprehension version
+taxa_dict = {order: {species for s, o in taxa if o == order} for species, order in taxa}
+
+# Print the results
+for order, species_set in taxa_dict.items():
+    print(f"'{order}': {species_set}")
+
+
