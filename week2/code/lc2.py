@@ -1,3 +1,14 @@
+#!/usr/bin/env python3
+
+"""Average Rainfall data in conventional loops
+
+and list comprehensions.
+
+Author: Anaga Ambady (aa6725@ic.ac.uk)
+Version: 1.0.0
+Date: Oct 2025
+"""
+
 # Average UK Rainfall (mm) for 1910 by month
 # http://www.metoffice.gov.uk/climate/uk/datasets
 rainfall = (('JAN',111.4),
