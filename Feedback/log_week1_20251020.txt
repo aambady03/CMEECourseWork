@@ -402,8 +402,8 @@ No errors.
 FEEDBACK SUMMARY
 ======================================================================
 
-Scripts tested: 14
-Scripts successful: 12
+Scripts tested: 8
+Scripts successful: 6
 Scripts with errors: 2
 Warnings/Notes: 1
 
