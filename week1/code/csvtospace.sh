@@ -9,7 +9,7 @@
 
 #check for input file
 if [ -z "$1" ]; then
-    echo "Usage: $0 input_file.txt" 
+    echo "Error: No input file entered" 
     exit 1
 fi
 
@@ -22,8 +22,8 @@ if [ ! -f "$input" ]; then
     exit 1
 fi
 
-#create output filename (removes .csv suffix)
-outfile="${input%.csv}.txt"
+#create output filename (removes .csv suffix from any file name)
+outfile="${input%.*}.txt"
 
 
 #converts csv to space-seperated and save as file name
