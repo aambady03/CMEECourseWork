@@ -1,9 +1,10 @@
 #!/bin/sh
 # Author: Anaga Ambady anaga.ambady25@imperial.ac.uk
 # Script: tabtocsv.sh
-# Description: Checks to see if there is an existing input file
-# Saves the output into a .csv file
-# Otherwise prints error message and tells user to enter input
+# Description: Checks to see if there is an argument that 
+# corresponds to existing input file then
+# saves the output into a .csv file,
+# otherwise prints error message and tells user to enter input
 # Arguments: 1 -> tab delimited file
 # Date: Oct 2025
 
