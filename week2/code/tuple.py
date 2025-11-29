@@ -1,3 +1,11 @@
+#!/usr/bin/env python3
+
+""" Changing the formatting for a tuple
+Author: Anaga Ambady (aa6725@ic.ac.uk)
+Version: 1.0.0
+Date: Oct 2025
+"""
+
 birds = ( ('Passerculus sandwichensis','Savannah sparrow',18.7),
           ('Delichon urbica','House martin',19),
           ('Junco phaeonotus','Yellow-eyed junco',19.5),
