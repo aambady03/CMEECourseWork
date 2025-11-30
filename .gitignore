@@ -1,5 +1,8 @@
- *~ 
+*~ 
 *.tmp
 **/sandbox/*
+**/testcsv.csv/*
+**/JustOaksData.csv/*
 **/results/*
+**/myenv/*
 !**/.gitkeep
