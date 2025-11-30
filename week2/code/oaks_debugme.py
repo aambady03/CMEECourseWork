@@ -11,9 +11,6 @@ Version: 1.0.0
 Date: Oct 2025
 """
 
-__author__ = 'Anaga Ambady (aa6725@ic.ac.uk)'
-__version__ = '1.0.0'
-
 import csv
 import sys
 import doctest
