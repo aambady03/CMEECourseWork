@@ -6,14 +6,14 @@
 # Usage: countlines.sh <inputfile>
 # Date: Oct 2025
 
-#check if there is an input file
+# check if there is an input file
 if [ -z "$1" ]; then
     echo "Usage; $0 <filename>"
     echo "Error: No input file entered"
     exit 1
 fi
 
-#check if file exists
+# check if file exists
 if [ ! -f "$1" ]; then
     echo "Error: file '$1' not found"
     exit 1
@@ -25,7 +25,7 @@ if [ ! -r "$1" ]; then
     exit 1
 fi
 
-#display line count for file
+# display line count for file
 NumLines=$(wc -l < "$1")
 echo "The file $1 has $NumLines lines"
 echo

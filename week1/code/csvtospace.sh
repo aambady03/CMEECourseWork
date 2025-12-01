@@ -7,30 +7,30 @@
 # Usage: bash csvtospace.sh <input.csv>
 # Date: Oct 2025
 
-#check for input file
+# check for input file
 if [ -z "$1" ]; then
     echo "Error: No input file entered" 
     exit 1
 fi
 
-#assign input variable
+# assign input variable
 input="$1"
 
-#check if file exists
+# check if file exists
 if [ ! -f "$input" ]; then
     echo "Error: file '$input' not found"
     exit 1
 fi
 
-#create output filename (removes .csv suffix from any file name)
+# create output filename (removes .csv suffix from any file name)
 outfile="${input%.*}.txt"
 
 
-#converts csv to space-seperated and save as file name
+# converts csv to space-seperated and save as file name
 tr "," " " < "$input" > "$outfile"
 
 
-#prints message for user
+# prints message for user
 echo "Success! Creating a space delimited version of $input ..."
 echo "Created! Output is saved to $outfile"
 exit 0 

@@ -8,23 +8,23 @@
 # Arguments: 1 -> tab delimited file
 # Date: Oct 2025
 
-#check for input file
+# check for input file
 if [ -z "$1" ]; then
     echo "Usage: $0 input_file.txt" 
     exit 1
 fi
 
-#check if file exists
+# check if file exists
 if [ ! -f "$1" ]; then
     echo "Error: file '$1' not found"
     exit 1
 fi
 
-#removes txt suffix
-#convert file to csv and save as file name
+# removes txt suffix
+# convert file to csv and save as file name
 outfile="${1%.txt}.csv"
 
-#prints message for user
+# prints message for user
 echo "Creating a comma delimited version of $1 ..."
 tr "\t" ","< "$1" > "$outfile"
 echo "Done! Output is saved to $outfile"
