@@ -41,15 +41,16 @@ def foo_4(x):
         result = result * i
     return f"{x} factorial is {result} (e.g., {x}! = {result})"  
 
+#a Helper function to calculate
+def calculate(n):
+        if n == 1 or n == 0:
+            return 1
+        else:
+            return n * calculate(n - 1)
+    
 # calculate factorial using recursion
 def foo_5(x):
     """Calculates x! using recursion."""
-    #a Helper function to calculate
-    def calculate(n):
-        if n == 1:
-            return 1
-        return n * calculate(n - 1)
-    
     #b Calculate result
     result = calculate(x)
     
@@ -57,7 +58,7 @@ def foo_5(x):
     steps = " × ".join(str(i) for i in range(x, 0, -1))
     
     #d Return formatted string
-    return f"{x}! = {steps} = {result}"
+    return f"{x} is factorised into {result}"
 
 # calculate factorial using 'for' loop
 def foo_6(x):
