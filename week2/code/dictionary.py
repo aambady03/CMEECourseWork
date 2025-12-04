@@ -43,10 +43,7 @@ for order, species_set in taxa_dict.items():
 # 2.Now write a list comprehension that does the same (including the printing after the dictionary has been created)  
 
 # List comprehension version
-taxa_dict = {order: {species for s, o in taxa if o == order} for species, order in taxa}
-
 # Print the results
-for order, species_set in taxa_dict.items():
-    print(f"\n'{order}': {species_set}")
 
-
+taxa_dict = {order: {species for species, o in taxa if o == order} for species, order in taxa}
+print(taxa_dict)

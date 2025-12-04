@@ -21,6 +21,7 @@ birds = ( ('Passerculus sandwichensis','Savannah sparrow',18.7),
 #1A. latin names-comprehensions
 #1B. common names
 #1C. mean body mass
+
 latin_names = [row[0] for row in birds]
 common_names = [row[1] for row in birds]
 mbody_mass = [row[2] for row in birds]
@@ -29,6 +30,7 @@ ln = ', '.join(map(str, latin_names))
 cn = ', '.join(map(str, common_names)) 
 mm = ', '.join(map(str, mbody_mass))
 
+print("List Comprehensions:")
 print(("The latin names of the species are:"), ln)     
 print(("The common names of the species are:"), cn)
 print(("The mean body masses of the species are:"), mm)
@@ -37,35 +39,23 @@ print(("The mean body masses of the species are:"), mm)
 # before 1 !). 
 
 #2A. latin names-conventional loops 
-
-
-latin_names = []
-for row in birds:
-    latin_names.append(row[0])
-
-ln = ', '.join(map(str, latin_names))
-     
-print(("The latin names of the species are:"), ln)
-
 #2B. common names
-
-
-common_names = []
-for row in birds:
-    common_names.append(row[1])
-
-cn = ', '.join(map(str, common_names))
-     
-print(("The common names of the species are:"), cn)
-
 #2C. mean body mass
 
-
+latin_names = []
+common_names = []
 mbody_mass = []
+
 for row in birds:
+    latin_names.append(row[0])
+    common_names.append(row[1])
     mbody_mass.append(row[2])
 
+ln = ', '.join(map(str, latin_names))
+cn = ', '.join(map(str, common_names))
 mm = ', '.join(map(str, mbody_mass))
      
+print("\nConventional Loops:")
+print(("The latin names of the species are:"), ln)
+print(("The common names of the species are:"), cn)
 print(("The mean body masses of the species in kg are:"), mm)
-
