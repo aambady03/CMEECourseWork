@@ -1,3 +1,11 @@
+##Author: Anaga Ambady (aa6725@ic.ac.uk)
+##Version: 1.0.0
+##Date: Oct 2025
+###Description: Reads a csv file, stores ever row as a tuple 
+##and prints the value from the first column of row
+##then reads the original CSV and creates a new one with only
+##species and body mass
+
 import csv
 
 # Read a file containing:

@@ -1,12 +1,11 @@
 #!/usr/bin/env python3
 
-"""Description of this program or application.
-You can use several lines"""
+"""Shows the basic layout for a python programme executed from command line"""
 
-__appname__ = '[application name here]'
-__author__ = 'Your Name (your@email.address)'
+__appname__ = '[boilerplate.py]'
+__author__ = 'Anaga Ambady (aa6725@ic.ac.uk)'
 __version__ = '0.0.1'
-__license__ = "License for this code/program"
+__license__ = "Imperial College"
 
 ## imports ##
 import sys # module to interface our program with the operating system
