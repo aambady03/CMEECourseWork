@@ -10,7 +10,8 @@ Version: 1.0.0
 Date: Oct 2025
 """
 ## import ##
-import csv, os
+import csv
+import os
 
 # define functions
 # calculate alignment score based on matches
@@ -20,10 +21,62 @@ sequence (s2) and a segment of the longer sequence (s1)
 starting at 'startpoint'"""
     score = 0
     for i in range(l2):
-        if (i + startpoint < l1):
-            if s1[i + startpoint] == s2[i]:
-                score += 1
+        if (i + startpoint < l1) and s1[i + startpoint] == s2[i]:
+            score += 1
     return score
+
+
+#read dna sequences
+def read_sequences(file_path):
+    """Read sequences from a CSV file"""
+    with open(file_path, "r") as f:
+        reader = csv.reader(f)
+        sequences = [row[0].strip() for row in reader if row]
+    return sequences
+
+def order_sequences(seq1, seq2):
+    """Return the longer and shorter sequences saved as an
+    object"""
+    l1, l2 = len(seq1), len(seq2)
+    if l1 >= l2:
+        return seq1, seq2, l1, l2
+    return seq2, seq1, l2, l1
+
+def find_best_alignment(s1, s2, l1, l2):
+    """Find the best alignment between both sequences"""
+    best_align = None
+    best_score = -1
+    
+    # find best alignment
+    for i in range(l1):
+        score = calculate_score(s1, s2, l1, l2, i)
+        if score > best_score:
+            best_align = "." * i + s2
+            best_score = score
+
+    return best_align, best_score
+
+def write_results(output_file, alignment, reference_seq, score):
+    """Write the alignment results to file"""
+    with open(output_file, "w") as out:
+        out.write("Best alignment:\n")
+        out.write(alignment + "\n")
+        out.write(reference_seq + "\n")
+        out.write(f"Best score: {score}\n")
+
+
+def perform_alignment(input_file, output_file):
+    """Perform sequence alignment workflow""" 
+    sequences = read_sequences(input_file)
+    seq1, seq2 = sequences[0], sequences[1]
+
+    s1, s2, l1, l2 = order_sequences(seq1, seq2)
+    best_align, best_score = find_best_alignment(s1, s2, l1, l2)
+
+     # write result files
+    write_results(output_file, best_align, s1, best_score)
+    print(f"Alignment complete. Results saved to {os.path.abspath(output_file)}")
+
 
 # defines relative file locations
 def main():
@@ -31,41 +84,9 @@ def main():
     and save results"""
     input_file = "../data/sequences.csv"
     output_file = "../results/alignment_result.txt"
-    
-    # read sequences from CSV file
-    with open(input_file, "r") as f:
-        reader = csv.reader(f)
-        sequences = [row[0].strip() for row in reader if row]
-    
-    seq1, seq2 = sequences[0], sequences[1]
-    
-    # determine longer (s1) and shorter (shorter) s2 sequences
-    # longest seq (s1) treated as reference seq
-    l1, l2 = len(seq1), len(seq2)
-    if l1 >= l2:
-        s1, s2 = seq1, seq2
-    else:
-        s1, s2 = seq2, seq1
-        l1, l2 = l2, l1  # swap the two lengths
-    
-    my_best_align = None
-    my_best_score = -1
-    
-    # find best alignment
-    for i in range(l1):
-        z = calculate_score(s1, s2, l1, l2, i)
-        if z > my_best_score:
-            my_best_align = "." * i + s2
-            my_best_score = z
-    
-    # write result files
-    with open(output_file, "w") as out:
-        out.write("Best alignment:\n")
-        out.write(my_best_align + "\n")
-        out.write(s1 + "\n")
-        out.write(f"Best score: {my_best_score}\n")
-    
-    print(f"Alignment complete. Results saved to {os.path.abspath(output_file)}")
+    perform_alignment(input_file, output_file)
 
+   
+   
 if __name__ == "__main__":
     main()
