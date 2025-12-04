@@ -18,8 +18,12 @@ import difflib
 
 
 def is_an_oak(name):
-    """Returns True if name starts with 'quercus' or is close to it (fuzzy matching)
-   
+    """Determines if a species name is an oak (Quercus) or a close variant,
+    using fuzzy matching to allow for minor typos.
+
+    A similarity ratio greater than 0.8 is considered
+    a match.
+
     >>> is_an_oak('Fagus sylvatica')
     False
     >>> is_an_oak('Quercus')
@@ -37,29 +41,32 @@ def is_an_oak(name):
     >>> is_an_oak('quercus ilex')
     True
     """ 
-    # Extract genus name (first word) and normalize
+    # extract genus name (first word) and normalize
     genus = name.strip().split()[0].lower()
     
-    # Use fuzzy matching to allow for minor typos
-    # A ratio > 0.8 means high similarity to 'quercus'
+    # use fuzzy matching to allow for minor typos
+    # a ratio > 0.8 means high similarity to 'quercus'
     similarity = difflib.SequenceMatcher(None, genus, 'quercus').ratio()
     return similarity > 0.8
 
-
+# define relative file paths
 def main(argv): 
     with open('../data/TestOaksData.csv', 'r') as f, \
          open('../data/JustOaksData.csv', 'w', newline='') as g:
         
         taxa = csv.reader(f) 
-        header = next(taxa)  # Skip header row
+        # skip header row
+        header = next(taxa)  
         
         csvwrite = csv.writer(g)
-        csvwrite.writerow(header)  # Write header to output file
+        # write header to output file
+        csvwrite.writerow(header)  
         
         oaks_count = 0
         
         for row in taxa:
-            if not row:  # Skip empty rows
+            # skip empty rows
+            if not row:  
                 continue
                 
             genus = row[0].strip()
