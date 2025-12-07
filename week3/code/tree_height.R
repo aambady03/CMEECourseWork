@@ -15,7 +15,7 @@
 # OUTPUT
 # The heights of the tree, same units as "distance"
 
-#l oad csv file
+# load csv file
 input_file = read.csv("../data/trees.csv")
 
 
