@@ -1,4 +1,7 @@
-# A boilerplate R script
+##Author: Anaga Ambady (aa6725@ic.ac.uk)
+##Version: 1.0.0
+##Date: Oct 2025
+##Description:  A boilerplate R script
 
 MyFunction <- function(Arg1, Arg2) {
   

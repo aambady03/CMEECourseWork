@@ -1,3 +1,7 @@
+##Author: Anaga Ambady (aa6725@ic.ac.uk)
+##Version: 1.0.0
+##Date: Oct 2025
+##Description: A script to compare different ways of running simulations in R
 ######### Functions ##########
 
 ## A function to take a sample of size n from a population "popn" and return its mean
