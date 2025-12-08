@@ -10,6 +10,9 @@ rm(list=ls())  # Clear the workspace
 if (!requireNamespace("RSQLite", quietly = TRUE))
         stop("Please install the RSQLite package to run this script")
 
+# Load the RSQLite package
+library(sqldf)
+
 # The command below opens a connection to the database.
 #If the database does not yet exist, one is created in the working directory of R.
 db <- dbConnect(SQLite(), dbname='Test.sqlite')
