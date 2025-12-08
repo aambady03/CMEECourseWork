@@ -71,8 +71,7 @@ print(p)
 # --- 4. Save the Figure as PDF ---
 
 # Define the full path for the output file
-output_path <- file.path(../results, "Girko.pdf")
-
+output_path <- file.path("..", "results", "Girko.pdf")
 # Save the plot to PDF file
 ggsave(output_path, plot = p, device = "pdf", width = 7, height = 7)
 
