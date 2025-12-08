@@ -23,6 +23,3 @@ PreallocFun <- function(x) {
 }
 
 system.time(PreallocFun(100))
-
-print(a1)
-print(a2)
