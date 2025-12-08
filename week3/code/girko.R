@@ -70,14 +70,8 @@ print(p)
 
 # --- 4. Save the Figure as PDF ---
 
-# Create the 'results' directory if it doesn't exist
-results_dir <- "results"
-if (!dir.exists(results_dir)) {
-  dir.create(results_dir)
-}
-
 # Define the full path for the output file
-output_path <- file.path(results_dir, "Girko.pdf")
+output_path <- file.path(../results, "Girko.pdf")
 
 # Save the plot to PDF file
 ggsave(output_path, plot = p, device = "pdf", width = 7, height = 7)
