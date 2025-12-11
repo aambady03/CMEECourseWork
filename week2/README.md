@@ -1,135 +1,166 @@
-# CMEE Coursework Repository
+# CMEE Coursework — Week 2 (Python Fundamentals)
 
 ## Overview
 
-This repository contains coursework materials for the MSc in Computational Methods in Ecology and Evolution (CMEE) at Imperial College London. This README covers Week 2 content, which focuses on Python programming fundamentals including list comprehensions, control flow, and practical bioinformatics applications.
+This folder contains materials for Week 2 of the CMEE coursework, focused on Python programming fundamentals: list comprehensions, control flow, data structures, and a small bioinformatics exercise (sequence alignment).
 
-## Repository Structure
+## Directory Structure
 
 ```
-CMEECourseWork/
-└── week2/
-    └── code/
-        ├── lc1.py
-        ├── lc2.py
-        ├── dictionary.py
-        ├── cfexercises1.py
-        ├── align_seq.py
-        └── oaks_debugme.py
+week2/
+├── code/
+│   ├── align_seqs.py
+│   ├── basic_csv.py
+│   ├── basic_io1.py
+│   ├── basic_io2.py
+│   ├── basic_io3.py
+│   ├── boilerplate.py
+│   ├── cfexercises1.py
+│   ├── cfexercises2.py
+│   ├── conditionals.py
+│   ├── control_flow.py
+│   ├── debugme.py
+│   ├── dictionary.py
+│   ├── lc1.py
+│   ├── lc2.py
+│   ├── loops.py
+│   ├── my_example_script.py
+│   ├── oaks_debugme.py
+│   ├── oaks.py
+│   ├── scope.py
+│   ├── sysargv.py
+│   ├── test_control_flow.py
+│   ├── tuple.py
+│   └── using_name.py
+├── data/
+│   ├── sequences.csv
+│   ├── test.txt
+│   ├── testcsv.csv
+│   └── TestOaksData.csv
+├── results/
+└── sandbox/
 ```
 
-## Week 2: Python Fundamentals
+## Scripts Overview (`code/`)
 
-### Scripts Overview
+Each script demonstrates a specific Python programming concept or technique.
 
-#### 1. List Comprehensions and Data Processing
+| Script | Purpose |
+|--------|---------|
+| `lc1.py` | Bird species data processing with list comprehensions and loops |
+| `lc2.py` | Rainfall data filtering using comprehensions (>100mm or <50mm) |
+| `dictionary.py` | Taxonomic data organization with dict/set comprehensions |
+| `cfexercises1.py` | Control flow exercises with comparisons and sorting |
+| `cfexercises2.py` | Factorial implementations (iterative and recursive) with doctests |
+| `control_flow.py` | Examples of Python control flow fundamentals |
+| `conditionals.py` | Conditional statement demonstrations |
+| `loops.py` | Loop examples and patterns |
+| `tuple.py` | Tuple data structure examples |
+| `scope.py` | Variable scope demonstrations |
+| `align_seqs.py` | Sliding-window sequence alignment algorithm |
+| `oaks_debugme.py` | Oak species filtering with doctests and fuzzy matching |
+| `oaks.py` | Extract genus *Quercus* from taxonomic CSV data |
+| `basic_io1.py` | File reading examples |
+| `basic_io2.py` | File writing examples |
+| `basic_io3.py` | Combined I/O operations |
+| `basic_csv.py` | CSV parsing demonstrations |
+| `sysargv.py` | Command-line argument handling |
+| `using_name.py` | `__name__` variable usage examples |
+| `debugme.py` | Debugging exercise script |
+| `boilerplate.py` | Python script template |
+| `my_example_script.py` | General teaching example |
+| `test_control_flow.py` | Unit tests for control flow functions |
 
-**lc1.py** - Bird Species Data Processing
-- Processes bird species data (Latin names, common names, mean body masses)
-- Demonstrates both list comprehensions and conventional loops
-- Compares two programming approaches for data extraction
+## Data Overview (`data/`)
 
-**lc2.py** - Rainfall Data Filtering
-- Analyzes UK monthly rainfall data from 1910
-- Filters months with rainfall >100mm and <50mm
-- Implements filtering using both list comprehensions and conventional loops
+### Sequence Files
+Example DNA/protein sequences used to practice:
+- Sequence alignment algorithms
+- String manipulation
+- File parsing
 
-**dictionary.py** - Taxonomic Data Organization
-- Creates dictionaries mapping taxonomic orders to species sets
-- Demonstrates dictionary and set comprehensions
-- Shows both conventional and comprehension-based approaches
+**Files:**
+- `sequences.csv`
 
-#### 2. Control Flow
+### Taxonomic Data
+Species datasets used to practice:
+- Data filtering
+- Pattern matching
+- CSV manipulation
 
-**cfexercises1.py** - Control Flow Demonstrations
-- `foo_1(y)`: Calculates square root
-- `foo_2(x, y)`: Compares two values
-- `foo_3(x, y, z)`: Sorts three numbers in descending order
-- `foo_4(x)`: Calculates factorial using loops
-- `foo_5(x)`: Recursive factorial calculation with step display
-- `foo_6(x)`: Iterative factorial with factorization steps
+**Files:**
+- `TestOaksData.csv`
 
-#### 3. Bioinformatics Application
+### General Files
+Simple datasets for I/O exercises:
+- `test.txt` — Example text file for I/O operations
+- `testcsv.csv` — Example CSV for parsing exercises
 
-**align_seq.py** - DNA Sequence Alignment
-- Reads two DNA sequences from a CSV file
-- Finds optimal alignment with maximum matching bases
-- Uses sliding window approach to test all possible alignments
-- Outputs best alignment, score, and sequences to a text file
+## Prerequisites
 
-#### 4. Debugging and Data Validation
+- Python 3.8+ (3.12 available in supplied virtual environment)
+- Standard library modules only (no external dependencies)
+- `pytest` (optional) for running `test_control_flow.py`
 
-**oaks_debugme.py** - Oak Species Filter
-- Extracts oak species (*Quercus* genus) from taxonomic CSV data
-- Implements fuzzy string matching to handle typos (>80% similarity threshold)
-- Includes doctests for validation
-- Outputs filtered data to a new CSV file
+## Example Workflows
 
-## Getting Started
-
-### Prerequisites
-
-- Python 3.x
-- Standard library modules (no external dependencies for most scripts)
-- For `oaks_debugme.py`: `difflib` module (included in Python standard library)
-
-### Installation
-
-1. Clone the repository:
+**Run list comprehension examples:**
 ```bash
-git clone <repository-url>
-cd CMEECourseWork/week2/code
-```
-
-2. Ensure Python 3 is installed:
-```bash
-python3 --version
-```
-
-### Usage
-
-Run any script from the command line:
-
-```bash
+cd ~/Documents/CMEECourseWork/week2/code
 python3 lc1.py
 python3 lc2.py
-python3 dictionary.py
+```
+
+**Execute control flow exercises:**
+```bash
 python3 cfexercises1.py
-python3 align_seq.py
+python3 cfexercises2.py
+```
+
+**Perform sequence alignment:**
+```bash
+python3 align_seqs.py
+# Check results/alignment_result.txt for output
+```
+
+**Filter oak species:**
+```bash
 python3 oaks_debugme.py
 ```
 
-**Note**: Some scripts may require input CSV files in the same directory or specified data directory.
+**Run tests:**
+```bash
+pytest -q test_control_flow.py
+```
 
-## Key Learning Outcomes
+## Learning Outcomes
 
-- **List Comprehensions**: Efficient data processing and filtering
-- **Control Flow**: Conditional statements, loops, and recursion
-- **Data Structures**: Lists, tuples, dictionaries, and sets
-- **File I/O**: Reading from and writing to CSV and text files
-- **Algorithm Design**: Sequence alignment optimization
-- **Code Quality**: Debugging, testing, and validation with doctests
+By completing Week 2, you should be comfortable with:
+- List comprehensions and comprehension syntax
+- Control flow: conditionals, loops, recursion
+- Python data structures: lists, tuples, sets, and dictionaries
+- File input/output and simple CSV parsing
+- Basic algorithm design: sliding-window sequence alignment
+- Debugging with doctests and simple unit tests
 
 ## Author
 
-**Anaga Ambady** 
-Email: aa6725@ic.ac.uk  
-MSc Computational Methods in Ecology and Evolution  
-Imperial College London
+Anaga Ambady  
+Email: aa6725@ic.ac.uk
 
 ## Version History
 
-See commit history for detailed version information:
+View full commit log:
 ```bash
 git log --oneline
 ```
 
 ## License
 
-This project is part of academic coursework at Imperial College London.
+This repository contains coursework for the CMEE program at Imperial College London.  
+Use is limited to educational purposes.
 
 ## Acknowledgments
 
 - CMEE course instructors and teaching assistants
 - Imperial College London
-- Course materials and practical sessions

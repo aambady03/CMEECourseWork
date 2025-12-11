@@ -1,55 +1,141 @@
-# Project Title
+# CMEE Coursework Repository
 
-MY CMEE Coursework Repository
-
--week 1 : Linux, Shell Scripting and Basic Coding Functions
-
-## Description
-
-Basic Bash Scripts
-1. FASTA file questions; analysis done of 'fasta' code in code
-Improving shell Script
-2. Shell Scripts for merging two files together 
-3. Shell Scripts for counting the number of lines per file
-4. Shell Scripts for converting tab delimeted files into comma seperated files
-Write Shell Script
-5. Shell Scripts for converting comma seperated values file to space delimeted
-LaTex
-6. Compiling txt files into a pdf with reference and bibliography
-
-## Getting Started
-
-
-### Dependencies
-path: 
-week1- ~/Documents/CMEECourseWork/week1/code
-
-### Executing program
-
-* Running Programme
-1. This script processes E.coli genome data in FASTA format by first counting total lines across files and then extracting the sequence without headers. It calculates the genome length, counts individual nucleotides (A, T, G, C), sums these into AT and GC totals, and finally computes the AT/GC ratio, which is useful for understanding the genome’s nucleotide composition. The script also includes checks to handle edge cases like division by zero.
-2. This script checks for required input files, merges the contents of two specified files by overwriting and appending into a new file, and then displays the merged file content, ensuring proper usage and error handling throughout.
-3. The script checks if an input filename is provided, verifies that the file exists, and confirms it is readable. If any of these checks fail, it outputs an error and exits. If all checks pass, it counts and displays the number of lines in the specified file.
-4. This script checks for a valid input file, converts a tab-delimited .txt file into a comma-delimited .csv file by replacing tabs with commas, and saves the output with a new filename, providing user feedback throughout.
-5. This script first checks if an input filename is provided as an argument; if not, it displays usage instructions and exits. It then verifies whether the specified input file exists, exiting with an error message if it doesn't. The script creates an output filename by replacing the .csv extension of the input file with .txt. It converts the CSV file into a space-separated format by replacing commas with spaces, saving the result to the new output file. Finally, it prints success messages to inform the user of the conversion and the location of the output file before exiting.
-6. Compiling bibliography and main text into pdf format using LaTeX
-
-
+## Project Overview
+This repository contains coursework materials for the Computational Methods in Ecology and Evolution (CMEE) program at Imperial College London.
 
 ---
 
-### Authors
+## Week 1: Linux, Shell Scripting and Basic Coding Functions
 
-Anaga Ambady
-[aa6725@ic.ac.uk]
+### Description
+Week 1 focuses on Linux shell scripting, basic text-processing utilities, and working with FASTA and tabular data. Scripts demonstrate fundamental concepts in Bash programming and data manipulation.
+
+### Directory Structure
+```
+week1/
+├── code/
+│   ├── boilerplate.sh
+│   ├── compile_latex.sh
+│   ├── concatenatetwofiles.sh
+│   ├── countlines.sh
+│   ├── csvtospace.sh
+│   ├── firstexample.tex
+│   ├── FirstExample.pdf
+│   ├── my_example_script.sh
+│   ├── tabtocsv.sh
+│   ├── tiff2png.sh
+│   ├── unix_prac1.txt
+│   └── variables.sh
+├── data/
+│   ├── fasta/
+│   │   ├── 407228326.fasta
+│   │   ├── 407228412.fasta
+│   │   └── E.coli.fasta
+│   ├── Temperatures/
+│   │   ├── 1800.csv
+│   │   ├── 1801.csv
+│   │   ├── 1802.csv
+│   │   └── 1803.csv
+│   └── at3_1m4_01.tif
+├── results/
+│   └── .gitkeep
+├── sandbox/
+└── README.md
+```
+
+### Scripts Overview (`code/`)
+
+| Script | Purpose |
+|--------|---------|
+| `boilerplate.sh` | Template for new Bash scripts (shebang, author, usage, structure) |
+| `compile_latex.sh` | Compiles a LaTeX file and bibliography into a PDF |
+| `concatenatetwofiles.sh` | Safely merges two files into one output file |
+| `countlines.sh` | Counts the number of lines in a text file with input validation |
+| `csvtospace.sh` | Converts comma-separated values to space-separated formatting |
+| `tabtocsv.sh` | Converts tab-delimited files into CSV format |
+| `tiff2png.sh` | Converts TIFF images to PNG (requires ImageMagick) |
+| `variables.sh` | Demonstration script for shell variables, user input, and arguments |
+| `my_example_script.sh` | General-purpose example used in teaching practical exercises |
+| `unix_prac1.txt` | Document of notes or tasks used in the Unix practical |
+| `firstexample.tex` / `FirstExample.pdf` | Example LaTeX source and compiled document |
+
+### Data Overview (`data/`)
+
+#### FASTA Files (`data/fasta/`)
+Example sequence data used to practice:
+- File reading
+- Searching with `grep`
+- Counting bases
+- Writing small parsing scripts
+
+**Files:**
+- `407228326.fasta`
+- `407228412.fasta`
+- `E.coli.fasta`
+
+#### Temperature CSV Files (`data/Temperatures/`)
+Simple tabular datasets used to practice:
+- Looping over files
+- CSV manipulation
+- Basic summarization
+
+**Files:**
+- `1800.csv`
+- `1801.csv`
+- `1802.csv`
+- `1803.csv`
+
+#### Other Data Files
+- `at3_1m4_01.tif` — Demonstration file for testing image conversion (`tiff2png.sh`)
+
+### Example Workflows
+
+**Count lines in a file:**
+```bash
+bash code/countlines.sh data/fasta/E.coli.fasta
+```
+
+**Convert a tab-delimited file to CSV:**
+```bash
+bash code/tabtocsv.sh data/input.txt > data/output.csv
+```
+
+**Combine two files:**
+```bash
+bash code/concatenatetwofiles.sh file1.txt file2.txt merged.txt
+```
+
+**Convert a TIFF image to PNG:**
+```bash
+bash code/tiff2png.sh data/at3_1m4_01.tif
+```
+
+**Compile a LaTeX document:**
+```bash
+bash code/compile_latex.sh code/firstexample.tex
+```
+
+### Learning Outcomes
+By completing Week 1, you should be comfortable with:
+- Navigating a Unix shell
+- Writing, executing, and debugging Bash scripts
+- Using `grep`, `awk`, `sed`, `cut`, and pipes
+- Automating file processing workflows
+- Converting file formats (CSV, TSV, TIFF → PNG)
+- Understanding script structure and reproducibility principles
+
+---
+
+## Author
+**Anaga Ambady**  
+Email: aa6725@ic.ac.uk
 
 ## Version History
-
-*See git commit history
+View full commit log:
+```bash
+git log --oneline
+```
 
 ## License
-
--
-## Acknowledgments
-
--
+This repository contains coursework for the CMEE program at Imperial College London.  
+Use is limited to educational purposes.
