@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Bootcamp_Assessment_AnagaAmbady_NA</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Bootcamp_Assessment_AnagaAmbady_NA</h1>
+</header>
+<h1 id="bootcamp-assessment-anaga-ambady">Bootcamp Assessment: Anaga
+Ambady</h1>
+<h2 id="execution-results">Execution results</h2>
+<ul>
+<li>Scripts tested: <strong>59</strong></li>
+<li>Scripts successful: <strong>50</strong></li>
+<li>Scripts with errors: <strong>9</strong></li>
+<li>Warnings/Notes: <strong>35</strong></li>
+</ul>
+<p>Scripts with <strong>non-zero exit codes</strong> (from script
+execution blocks): - <code>compileLaTeX.sh</code> (exit 1) -
+<code>compile_latex.sh</code> (exit 1) -
+<code>concatenatetwofiles.sh</code> (exit 2) -
+<code>countlines.sh</code> (exit 1) - <code>csvtospace.sh</code> (exit
+1) - <code>tabtocsv.sh</code> (exit 1) - <code>tiff2png.sh</code> (exit
+1) - <code>debugme.py</code> (exit 1) - <code>sq_lin.R</code> (exit
+1)</p>
+<ul>
+<li>Several failures are consistent with <strong>missing command-line
+arguments</strong>, <strong>environment limitations</strong>, or
+<strong>missing optional dependencies</strong>.</li>
+</ul>
+<h2 id="script-specific-feedback">Script-Specific Feedback</h2>
+<blockquote>
+<p>Representative scripts chosen to cover: strong examples, assigned
+scripts, execution issues, and common style/robustness problems.</p>
+</blockquote>
+<p>(Representative selection across missing/assigned, execution
+failures, and strong examples.)</p>
+<h3 id="csvtospace.sh">csvtospace.sh</h3>
+<p>Status: <strong>Present but not validated
+(interactive/arg-dependent)</strong></p>
+<p>Evidence (from LOG): - Exit code: <strong>1</strong> - Missing from
+expected list: <strong>No</strong> - Tool warnings: None reported -
+Output validation: Expected <code>*_space.txt</code> pattern reported
+missing (repo-level output check)</p>
+<ul>
+<li>The script correctly guards against missing arguments and exits with
+an informative message when no input is provided.</li>
+<li>The automated runner executed it with no arguments
+(<code>bash csvtospace.sh</code>), so the failure is expected in that
+context.</li>
+</ul>
+<p>Improvement suggestion: - Add a <em>default</em> example input (or a
+usage/help branch like <code>-h</code>) and/or ensure course-expected
+naming matches (e.g., create <code>*_space.txt</code> if that is the
+required convention).</p>
+<p>Rubric relevance: - Criterion 2 (runs in clean environment) -
+Criterion 8 (basic input validation) - Criterion 9 (simple
+text-processing approach)</p>
+<hr />
+<h3 id="debugme.py">debugme.py</h3>
+<p>Status: <strong>Ran and failed (logic error not fixed)</strong></p>
+<p>Evidence (from LOG): - Exit code: <strong>1</strong> - Missing from
+expected list: <strong>No</strong> - Tool warnings: None reported -
+Output validation: N/A</p>
+<p>Errors shown in LOG: -
+<code>ZeroDivisionError: division by zero</code> at <code>z = x/y</code>
+within loop.</p>
+<ul>
+<li>This looks like the <em>intended</em> “debugme” exercise, but the
+submitted version still contains the known bug (division by zero when
+<code>y</code> reaches 0).<br />
+</li>
+<li>This is a functional-correctness issue rather than a missing
+submission.</li>
+</ul>
+<p>Improvement suggestion: - Fix by preventing <code>y</code> from
+reaching 0 (e.g., adjust loop bounds), or add a guard clause before
+division. Include a short comment explaining the fix.</p>
+<p>Rubric relevance: - Criterion 2 (functional correctness) - Criterion
+8 (guarding against invalid states) - Criterion 9
+(debugging/problem-solving evidence)</p>
+<hr />
+<h3 id="sq_lin.r">sq_lin.R</h3>
+<p>Status: <strong>Present but not validated (dependency issue in
+runner)</strong></p>
+<p>Evidence (from LOG): - Exit code: <strong>1</strong> - Missing from
+expected list: <strong>No</strong> (as a file) - Tool warnings: Style
+warnings noted elsewhere for this file - Output validation: N/A</p>
+<p>Errors shown in LOG: -
+<code>Error in library(sqldf) : there is no package called ‘sqldf’</code></p>
+<ul>
+<li>The script is structurally aligned with a database exercise, but the
+runner environment lacks <code>sqldf</code>.<br />
+</li>
+<li>This is a classic “works locally, fails on clean install” risk:
+either declare dependencies clearly, or rely on base/required packages
+only.</li>
+</ul>
+<p>Improvement suggestion: - Either (i) use <code>RSQLite</code>
+directly (consistent with your <code>requireNamespace("RSQLite")</code>
+check), or (ii) add <code>sqldf</code> to dependency instructions and
+validate install.</p>
+<p>Rubric relevance: - Criterion 2 (clean-environment reproducibility) -
+Criterion 3 (basic R style) - Criterion 4 (documentation of
+dependencies) - Criterion 8 (dependency checks)</p>
+<hr />
+<h3 id="compilelatex.sh-group-repo-helper">compileLaTeX.sh (group repo
+helper)</h3>
+<p>Status: <strong>Present but not validated (missing input file /
+headless GUI)</strong></p>
+<p>Evidence (from LOG): - Exit code: <strong>1</strong> - Missing from
+expected list: Not applicable (extra helper script) - Tool warnings:
+None reported - Output validation: N/A</p>
+<p>Errors shown in LOG: -
+<code>Error: File firstExample.tex not found</code></p>
+<ul>
+<li>Useful helper structure (argument parsing + file existence check),
+but the default target file isn’t present in
+<code>groupwork2/code</code> in the tested context.<br />
+</li>
+<li>Also includes <code>evince</code> (GUI) which will fail in headless
+environments.</li>
+</ul>
+<p>Improvement suggestion: - Remove GUI calls for assessment runs,
+and/or point defaults to the actual <code>.tex</code> in the repo.
+Consider writing a short README note for usage.</p>
+<p>Rubric relevance: - Criterion 2 (reproducibility/headless execution)
+- Criterion 8 (input/file existence checks)</p>
+<hr />
+<h3 id="florida.r-assigned">Florida.R (assigned)</h3>
+<p>Status: <strong>Missing (not found in repo in expected-scripts
+check)</strong></p>
+<p>Evidence (from LOG): - Missing assigned script list includes:
+<code>Florida.R</code> - No execution block present (so not run)</p>
+<ul>
+<li>This is the clearest form of incompleteness: the automated
+expected-scripts scan did not find the file.</li>
+</ul>
+<p>Improvement suggestion: - Ensure the script exists under the expected
+<code>week*/code/</code> structure with the exact expected filename and
+case.</p>
+<p>Rubric relevance: - Criterion 2 (completeness) - Criterion 1
+(organisation / expected structure)</p>
+<hr />
+<h3 id="pp_dists.r-assigned">PP_Dists.R (assigned)</h3>
+<p>Status: <strong>Missing (not found in repo in expected-scripts
+check)</strong></p>
+<p>Evidence (from LOG): - Missing assigned script list includes:
+<code>PP_Dists.R</code> - No execution block present</p>
+<ul>
+<li>Same as above: missing assigned work reduces confidence in
+completeness.</li>
+</ul>
+<p>Improvement suggestion: - Add the script (or ensure correct
+filename/case) and include a minimal run command in the week README.</p>
+<p>Rubric relevance: - Criterion 2 - Criterion 4</p>
+<hr />
+<h3 id="align_seqs_better.py-groupwork-extra">align_seqs_better.py
+(groupwork extra)</h3>
+<p>Status: <strong>Successful</strong></p>
+<p>Evidence (from LOG): - Exit code: <strong>0</strong> - Missing from
+expected list: Not required, but present and executed - Output
+validation: Not specified in log excerpt, but script executed
+successfully</p>
+<ul>
+<li>This script shows higher ambition (I/O, path handling, helper
+functions) and is good evidence of algorithmic engagement beyond minimal
+requirements.</li>
+</ul>
+<p>Improvement suggestion: - If this is intended as the “final” version,
+consider congoodating with the required <code>align_seqs_fasta.py</code>
+to avoid parallel implementations.</p>
+<p>Rubric relevance: - Criterion 2 (runs) - Criterion 3
+(structure/readability) - Criterion 9 (problem-solving)</p>
+<hr />
+<h3 id="tautocorr.r">TAutoCorr.R</h3>
+<ul>
+<li><p>Output validation: Produced a results text file and a PNG
+histogram in <code>groupwork2/results/</code></p></li>
+<li><p>Stdout reports observed correlation and permutation
+p-value</p></li>
+<li><p>Strong, complete implementation of the required autocorrelation
+permutation test (details below in the dedicated section).</p></li>
+</ul>
+<p>Improvement suggestion: - Avoid relying on non-essential packages
+unless necessary.</p>
+<p>Rubric relevance: - Criterion 2, 3, 8, 9, 10, 11</p>
+<h2 id="detailed-evaluation-tautocorr.r">Detailed Evaluation:
+TAutoCorr.R</h2>
+<h3 id="a.-specification-alignment">A. Specification Alignment</h3>
+<p>Observed in submitted <code>TAutoCorr.R</code> (from LOG contents): -
+<strong>Successive-year correlation via <code>cor()</code></strong>: ✓
+(<code>obs_cor &lt;- cor(temps[-length(temps)], temps[-1])</code>) -
+<strong>Permutation null distribution</strong>: ✓ (loop of
+<code>n_perm &lt;- 10000</code>, <code>sample(temps)</code>, recompute
+<code>cor()</code>) - <strong>Approx p-value</strong>: ✓
+(<code>p_value &lt;- mean(perm_cor &gt;= obs_cor)</code>) - <strong>Did
+not use <code>cor.test()</code></strong>: ✓ - <strong>Non-interactive
+run</strong>: ✓ (runs under <code>Rscript --vanilla</code>) -
+<strong>Relative path handling</strong>: <strong>Partially</strong>
+(uses <code>here::here("groupwork2","data",...)</code> which is robust
+<em>if</em> project root is as expected)</p>
+<h3 id="b.-conceptual-understanding-of-autocorrelation">B. Conceptual
+Understanding of Autocorrelation</h3>
+<ul>
+<li>Explicitly constructs successive-year pairs by offset indexing
+(<code>temps[-length]</code> vs <code>temps[-1]</code>)</li>
+<li>Breaks temporal structure in the null by permuting the series
+(<code>sample(temps)</code>)</li>
+<li>Reports observed correlation and permutation p-value, with an
+interpretation statement</li>
+<li>Clear conceptual grasp of <strong>lag-1 (successive year)
+association</strong> and why permutation provides a null distribution
+when temporal ordering is meaningful.</li>
+<li>Uses a one-sided test aligned with “positively correlated” language
+in the script output.</li>
+</ul>
+<hr />
+<h3 id="c.-algorithmic-implementation-depth-vs-example-solution">C.
+Algorithmic Implementation Depth (vs example solution)</h3>
+<p>Compared to <code>TAutoCorr_sol.R</code>: -
+<strong>Similarity:</strong> Both compute lag-1 correlation, generate a
+permutation null, compute a permutation p-value, and (optionally)
+visualise the null distribution. - <strong>Difference
+(structure):</strong> Example solution defines a function
+(<code>autocor_test</code>) and uses more explicit modular structure;
+the submitted script is <strong>single-pass</strong> (no function), but
+still clear. - <strong>Indexing/lag handling:</strong> Correct and clean
+in the submitted script. - <strong>Efficiency:</strong> Uses
+preallocated <code>perm_cor &lt;- numeric(n_perm)</code> and a loop:
+acceptable at bootcamp level.</p>
+<h3 id="d.-statistical-computational-rigor">D. Statistical &amp;
+Computational Rigor</h3>
+<ul>
+<li>Uses <code>cor()</code> consistently for observed and permuted
+statistics.</li>
+<li>Uses a clear null distribution and an empirical p-value
+estimate.</li>
+<li>One-sided p-value computed as
+<code>mean(perm_cor &gt;= obs_cor)</code>; this is coherent with
+“positively correlated” framing.</li>
+</ul>
+<p>Potential improvement: - Consider whether a two-sided p-value is more
+appropriate depending on the question wording; if keeping one-sided,
+state that explicitly in the write-up.</p>
+<h3 id="e.-error-handling-robustness-criterion-8-alignment">E. Error
+Handling &amp; Robustness (Criterion 8 alignment)</h3>
+<ul>
+<li>Minimal explicit input validation (assumes <code>dat$Temp</code>
+exists and has length &gt; 1).</li>
+<li>Would fail on very short series or missing <code>Temp</code>
+column.</li>
+</ul>
+<p>Suggested robustness additions: - Check file exists before
+<code>load()</code> - Assert <code>length(temps) &gt;= 3</code> (or at
+least 2) before computing correlations - Handle missing values
+(<code>NA</code>) explicitly if present</p>
+<h3 id="f.-comparison-with-example-solution">F. Comparison with Example
+Solution</h3>
+<h4 id="similarities">Similarities</h4>
+<ul>
+<li>Lag-1 correlation computation</li>
+<li>Permutation null distribution</li>
+<li>Empirical p-value estimation</li>
+<li>Optional histogram-style visualisation</li>
+</ul>
+<h4 id="key-omissions">Key omissions</h4>
+<ul>
+<li>No function abstraction (acceptable, but less reusable)</li>
+<li>No explicit handling of <code>NA</code> or short series edge
+cases</li>
+</ul>
+<h3 id="g.-overall">G. Overall</h3>
+<p>Specification alignment: - Matches core algorithm requirements
+(correlation, permutation, p-value, non-interactive run) - Write-up
+requirement: <strong>not evidenced</strong> for <code>groupwork2</code>
+in LOG</p>
+<p>Algorithmic evaluation: - Correct lag indexing and preallocation;
+loop-based null distribution is appropriate</p>
+<p>Conceptual understanding: - Strong: correct null model and
+interpretation of “positive correlation”</p>
+<p>Statistical correctness: - Appropriate use of <code>cor()</code> and
+empirical p-value; one-sided test matches stated conclusion</p>
+<p>Rubric relevance: - Criterion 2, 3, 8, 9, 10, 11</p>
+<ul>
+<li>High-quality implementation for bootcamp level; main gap is ensuring
+full spec compliance (write-up artefact) and minimal robustness
+checks.</li>
+</ul>
+<p>Improvement suggestion: - Add light validation (series length, NA
+handling) and ensure the LaTeX <code>.tex</code> + compiled PDF are
+included and referenced in the README.</p>
+<h2 id="groupwork">Groupwork</h2>
+<ul>
+<li>High commit count in individual repo (<strong>95 commits</strong>)
+suggests iterative work.</li>
+<li>Several scripts show meaningful structure (functions, path handling,
+output writing).</li>
+</ul>
+<h2 id="overall-feedback">Overall feedback</h2>
+<h3 id="whats-going-well">What’s going well</h3>
+<ul>
+<li><strong>Documentation is a clear strength</strong>: excellent main
+README + consistent weekly READMEs.</li>
+<li><strong>Core statistical reasoning is correct</strong> (TAutoCorr):
+correct lag-1 pairing, correct permutation null, clear outputs and
+interpretation.</li>
+<li><strong>Git usage is substantial</strong> in the individual repo,
+with mostly meaningful commit messages.</li>
+</ul>
+<h3 id="biggest-improvement-opportunities">Biggest improvement
+opportunities</h3>
+<ol type="1">
+<li><strong>Completeness of expected scripts (Criterion 2):</strong>
+ensure all required/assigned scripts are present with exact
+filenames/case.</li>
+<li><strong>Reproducibility on a clean environment (Criterion
+2):</strong>
+<ul>
+<li>Avoid optional dependencies unless required, or document + check
+them clearly.</li>
+<li>Make scripts runnable non-interactively (or provide safe defaults +
+<code>-h</code> help).</li>
+</ul></li>
+<li><strong>Group contribution clarity (Criterion 7):</strong>
+<ul>
+<li>Add <code>CONTRIBUTIONS.md</code> and ensure your commits reflect
+substantive work across the timeline.</li>
+</ul></li>
+</ol>
+<h2 id="priority-fixes-most-impact-for-least-effort">Priority fixes
+(most impact for least effort)</h2>
+<ol type="1">
+<li>Add missing assigned scripts (e.g., <code>Florida.R</code>,
+<code>PP_Dists.R</code>) with exact expected names/case under the
+correct <code>week*/code/</code> paths.</li>
+<li>Ensure expected “space-delimited” output naming matches the course
+convention (e.g., <code>*_space.txt</code>) and is produced in the
+expected locations.</li>
+<li>Make scripts robust to the automated runner:
+<ul>
+<li>provide safe defaults or usage help for arg-dependent shell
+scripts,</li>
+<li>avoid GUI calls (<code>evince</code>) during automated runs,</li>
+<li>minimise non-standard dependencies or document/install them
+clearly.</li>
+</ul></li>
+<li>For groupwork: add <code>CONTRIBUTIONS.md</code> and aim for more
+sustained, substantive commits earlier in the timeline.</li>
+</ol>
+<h2 id="summary">Summary</h2>
+<p>Very good work, reflecting clear learning and correct core methods,
+with actionable gaps in completeness, reproducibility, and group
+accountability. - <strong>Strengths:</strong> documentation quality,
+sustained individual Git activity, and a strong groupwork
+<code>TAutoCorr.R</code> implementation (correct permutation-based
+inference + saved outputs). - <strong>Main limitations:</strong> Some
+missing scripts, several clean-environment execution failures
+(args/dependencies).</p>
+<h2 id="mark-classification">Mark classification</h2>
+<!-- Total Mark: 72/100   -->
+<p>Classification: Distinction</p>
+</body>
+</html>
