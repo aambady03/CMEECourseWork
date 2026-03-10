@@ -1,0 +1,27 @@
+R is starting job 49
+Loaded R version: R version 4.5.2 (2025-10-31) -- "[Not] Part in a Rumble"
+Working directory: /rds/general/user/aa6725/home
+===========================================
+Starting simulation for job 49 
+Community size: 1000 
+Speciation rate: 0.0061118 
+Burn-in generations: 8000 
+Interval rich: 1 
+Interval oct: 100 
+Wall time: 690 minutes
+Output file: aa6725_neutral_49.rda 
+===========================================
+[1] "Simulation complete: 4815259 generations in 41400 seconds"
+===========================================
+Job 49 completed successfully!
+===========================================
+R job 49 has finished running
+
+====================================
+CPU Time used: 11:18:24
+CPU Percent: 98%
+Memory usage: 177068kb
+Approx Power usage: 0.13560000000000003
+Walltime usage: 11:30:34
+
+====================================

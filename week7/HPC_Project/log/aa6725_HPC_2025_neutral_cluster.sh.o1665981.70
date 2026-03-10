@@ -1,0 +1,27 @@
+R is starting job 70
+Loaded R version: R version 4.5.2 (2025-10-31) -- "[Not] Part in a Rumble"
+Working directory: /rds/general/user/aa6725/home
+===========================================
+Starting simulation for job 70 
+Community size: 2500 
+Speciation rate: 0.0061118 
+Burn-in generations: 20000 
+Interval rich: 1 
+Interval oct: 250 
+Wall time: 690 minutes
+Output file: aa6725_neutral_70.rda 
+===========================================
+[1] "Simulation complete: 1112666 generations in 41400.01 seconds"
+===========================================
+Job 70 completed successfully!
+===========================================
+R job 70 has finished running
+
+====================================
+CPU Time used: 11:20:46
+CPU Percent: 99%
+Memory usage: 179568kb
+Approx Power usage: 0.136
+Walltime usage: 11:30:25
+
+====================================

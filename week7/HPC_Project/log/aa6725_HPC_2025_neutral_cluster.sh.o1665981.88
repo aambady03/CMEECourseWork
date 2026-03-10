@@ -1,0 +1,27 @@
+R is starting job 88
+Loaded R version: R version 4.5.2 (2025-10-31) -- "[Not] Part in a Rumble"
+Working directory: /rds/general/user/aa6725/home
+===========================================
+Starting simulation for job 88 
+Community size: 5000 
+Speciation rate: 0.0061118 
+Burn-in generations: 40000 
+Interval rich: 1 
+Interval oct: 500 
+Wall time: 690 minutes
+Output file: aa6725_neutral_88.rda 
+===========================================
+[1] "Simulation complete: 463945 generations in 41400.01 seconds"
+===========================================
+Job 88 completed successfully!
+===========================================
+R job 88 has finished running
+
+====================================
+CPU Time used: 11:21:08
+CPU Percent: 99%
+Memory usage: 161652kb
+Approx Power usage: 0.1362
+Walltime usage: 11:30:33
+
+====================================

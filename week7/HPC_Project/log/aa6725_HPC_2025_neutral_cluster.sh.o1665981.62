@@ -1,0 +1,27 @@
+R is starting job 62
+Loaded R version: R version 4.5.2 (2025-10-31) -- "[Not] Part in a Rumble"
+Working directory: /rds/general/user/aa6725/home
+===========================================
+Starting simulation for job 62 
+Community size: 2500 
+Speciation rate: 0.0061118 
+Burn-in generations: 20000 
+Interval rich: 1 
+Interval oct: 250 
+Wall time: 690 minutes
+Output file: aa6725_neutral_62.rda 
+===========================================
+[1] "Simulation complete: 2085844 generations in 41400.01 seconds"
+===========================================
+Job 62 completed successfully!
+===========================================
+R job 62 has finished running
+
+====================================
+CPU Time used: 11:25:37
+CPU Percent: 99%
+Memory usage: 178184kb
+Approx Power usage: 0.137
+Walltime usage: 11:30:27
+
+====================================

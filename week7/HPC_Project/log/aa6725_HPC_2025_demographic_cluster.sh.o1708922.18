@@ -1,0 +1,14 @@
+R is starting job 18
+Loaded R version: R version 4.5.2 (2025-10-31) -- "[Not] Part in a Rumble"
+Working directory: /rds/general/user/aa6725/home
+[1] "Successfully saved results to demographic_sim_results_18.rda"
+R job 18 has finished running
+
+====================================
+CPU Time used: 00:00:03
+CPU Percent: 18%
+Memory usage: 93516kb
+Approx Power usage: 0.0
+Walltime usage: 00:00:33
+
+====================================
