@@ -173,7 +173,7 @@ biologically impossible for viable counts and represent instrument
 artefacts from blank subtraction that cannot be log-transformed.
 Remaining values were $\log_{10}$-transformed to linearise the
 exponential growth phase, consistent with standard practice in microbial
-growth analysis \citep{zwietering1990}. Each growth curve was assigned a
+growth analysis \citep{Zwietering1990}. Each growth curve was assigned a
 unique identifier formed by concatenating species, temperature, growth
 medium, replicate number, and citation, ensuring that curves from
 different sources were treated as independent observations.
@@ -215,7 +215,7 @@ Logistic produces a symmetric sigmoidal curve with its inflection fixed
 at $K/2$ and assumes immediate growth initiation at $t = 0$, with no
 explicit lag phase.
 
-The \textbf{Gompertz model} \citep{zwietering1990} relaxes both
+The \textbf{Gompertz model} \citep{Zwietering1990} relaxes both
 constraints of the Logistic:
 \begin{equation}
     \log_{10}(N(t)) = N_0 + (K - N_0)\exp\!\left(
@@ -313,7 +313,7 @@ weights renormalised to sum to one within the nonlinear subset:
          {w_{\text{Logi}} + w_{\text{Gomp}}}
 \end{equation}
 This follows the multi-model inference framework of \citet{burnham2002}
-and \citet{johnson2004}, producing parameter estimates that incorporate
+and \citet{Johnson2004}, producing parameter estimates that incorporate
 model selection uncertainty rather than conditioning on a single selected
 model.
 
@@ -390,14 +390,18 @@ the Gompertz was selected as best it carried a mean weight of $w =
 Quadratic (Figure \ref{fig:wins}), indicating that Logistic wins are
 often narrow while Gompertz wins tend to be more decisive.
 
-
-\begin{figure}
-        \centering
-        \includegraphics[width=0.5\linewidth]{../results/growth_curve.png}
-        \caption{Representative model fits to a bacterial growth curve (\textit{Arthrobacter globiformis}, TGE agar). The Logistic (green) and Gompertz (pink) models closely track all three growth phases (lag, exponential, and stationary), while the Quadratic (dashed orange) fails to capture the asymptotic plateau, predicting a biologically implausible decline in population density at late timepoints.}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{growth_curve.png}
+    \caption{Representative model fits to a bacterial growth curve
+    (\textit{Arthrobacter globiformis}, TGE agar). The Logistic (green)
+    and Gompertz (pink) models closely track all three growth phases
+    (lag, exponential, and stationary), while the Quadratic (dashed
+    orange) fails to capture the asymptotic plateau, predicting a
+    biologically implausible decline in population density at late
+    timepoints.}
     \label{fig:growth_fits}
 \end{figure}
-
 
 \begin{table}[H]
 \centering
@@ -431,21 +435,27 @@ $\Delta\text{AICc}$ evidence tiers confirmed this pattern (Figure
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\linewidth]{../results/plot_battle.png}
-    \caption{Relative support for candidate growth models (\textit{Mean Akaike weights (w) for each candidate model (Gompertz, Logistic, and Quadratic) calculated across all fitted curves.})}
+    \includegraphics[width=0.7\linewidth]{plot_battle.png}
+    \caption{Relative support for candidate growth models (\textit{Mean
+    Akaike weights (w) for each candidate model (Gompertz, Logistic, and
+    Quadratic) calculated across all fitted curves.})}
     \label{fig:wins}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\linewidth]{../results/plot_delta_tiers.png}
-    \caption{Thermal Performance Curves - Species Comparison. Model-averaged maximum growth rate ($\log r_{\max}$) as a function of temperature ($^\circ$C). Solid lines represent quadratic fits on a log scale for three representative species: \textit{Acinetobacter calcoaceticus} ($T_{\text{opt}} = 27.7^\circ$C), \textit{Pseudomonas fluorescens} ($T_{\text{opt}} = 26.6^\circ$C), and \textit{Arthrobacter aurescens} ($T_{\text{opt}} = 21.4^\circ$C). Points represent per-temperature medians across the experimental dataset.}
-    \label{fig:tpc}
+    \includegraphics[width=\linewidth]{plot_delta_tiers.png}
+    \caption{Distribution of Model Support Tiers across Growth Curves
+    (\textit{Relative support for three candidate growth models (Logistic,
+    Gompertz, and Quadratic) across the full converged experimental
+    dataset (n=235).})}
+    \label{fig:tiers}
 \end{figure}
+
 \subsection{Thermal sensitivity of model-averaged maximum growth rate}
 
 Model-averaged $r_{\max}$ estimates revealed a pronounced unimodal
-thermal response across the dataset (Figure \ref{fig:tpc}). Growth
+thermal response across the dataset (Figure \ref{fig:multi}). Growth
 rates were near zero below 8\,$^\circ$C, rose steeply between
 10--25\,$^\circ$C, peaked near 30--35\,$^\circ$C, and declined sharply
 at 37\,$^\circ$C. A quadratic regression on log-transformed $r_{\max}$
@@ -458,9 +468,16 @@ $T_{\text{opt}} = 33.5\,^\circ$C (Table \ref{tab:regression}).
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\linewidth]{../results/plot_tpc_multispecies.png}
-    \caption{Distribution of Model Support Tiers across Growth Curves (\textit{Relative support for three candidate growth models (Logistic, Gompertz, and Quadratic) across the full converged experimental dataset (n=235).})}
-    \label{fig:tiers}
+    \includegraphics[width=0.7\linewidth]{plot_tpc_multispecies.png}
+    \caption{Thermal Performance Curves --- Species Comparison.
+    Model-averaged maximum growth rate ($\log r_{\max}$) as a function of
+    temperature ($^\circ$C). Solid lines represent quadratic fits on a log
+    scale for three representative species: \textit{Acinetobacter
+    calcoaceticus} ($T_{\text{opt}} = 27.7^\circ$C), \textit{Pseudomonas
+    fluorescens} ($T_{\text{opt}} = 26.6^\circ$C), and \textit{Arthrobacter
+    aurescens} ($T_{\text{opt}} = 21.4^\circ$C). Points represent
+    per-temperature medians across the experimental dataset.}
+    \label{fig:multi}
 \end{figure}
 
 \begin{table}[H]
