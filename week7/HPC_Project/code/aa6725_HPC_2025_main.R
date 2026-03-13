@@ -16,6 +16,8 @@
   # wipe away any automarking code that may be running and that would be annoying!
   
   # Section One: Stochastic demographic population model
+  # Source the demographic functions
+  source("Demographic.R")
   
   # Question 0
   # Create a function to initialize the population in two starting scenarios:
@@ -55,9 +57,6 @@
   }
   
   # Question 1
-  # Source the demographic functions
-  source("Demographic.R")
-  
   question_1 <- function() {
     
     # Load growth matrix: how individuals survive and develop
@@ -89,21 +88,15 @@
     
     # Plot the results
     png(filename = "../results/question_1.png", width = 800, height = 500)
-        plot(0:24, result_adults, type="l", col="blue", lwd=2, ylim=range(c(result_adults, result_spread)), main="Effect of Initial Age Distribution on Population Growth", xlab="Time Step (months)", ylab="Total Population Size")
+        plot(0:24, result_adults, type="l", col="blue", lwd=2,xaxs = "i", xlim = c(0, 24) ,ylim=range(c(result_adults, result_spread)), main="Effect of Initial Age Distribution on Population Growth", xlab="Time Step", ylab="Total Population Size")
         lines(0:24, result_spread, col="red", lwd=2)
         legend("top", legend=c("All adults (0,0,0,100)", "Spread across stages (25,25,25,25)"), col=c("blue", "red"), lty=1, lwd=2, horiz=TRUE, bty="n")
     dev.off()
   }
   
-  # Run question 1
-  question_1()
-  
   # Question 2: Stochastic (Random) Population Model Comparison
   # Use both starting populations but now with randomness
   # (realism) through a "clutch distribution" (variation in eggs laid)
-  
-  source("Demographic.R")
-  
   question_2 <- function() {
     
   # Set up the same projection matrices as in Q1
@@ -142,29 +135,22 @@
     # Plot the results
     png(filename="../results/question_2.png", width=800, height=500)
     y_limit <- range(c(result_adults_stoc, result_spread_stoc))
-    plot(0:24, result_adults_stoc, type="l", col="blue", lwd=2, ylim=y_limit, main="Stochastic Population Model: Effect of Initial Conditions", xlab="Time Step (months)", ylab="Total Population Size")
+    plot(0:24, result_adults_stoc, type="l", col="blue", lwd=2, xaxs = "i", ylim=y_limit, main="Stochastic Population Model: Effect of Initial Conditions", xlab="Time Step", ylab="Total Population Size")
     lines(0:24, result_spread_stoc, col="red", lwd=2)
     legend("top", legend=c("All adults (0,0,0,100)", "Spread across stages (25,25,25,25)"), col=c("blue", "red"), lty=1, lwd=2, horiz=TRUE, bty="n")
     
     dev.off()
   }
-  # Run question 2
-  question_2()
+
     
   # Questions 3 and 4 involve writing code elsewhere to run your simulations on the cluster
-  
   
   # Question 5
   question_5 <- function(){
     
-    
     # Initialize a vector to store extinction counts for each condition
     count_extinctions <- rep(0, 4)
-    # count_extinctions[1] = Large adult population (files 1-25)
-    # count_extinctions[2] = Small adult population (files 26-50)
-    # count_extinctions[3] = Large spread population (files 51-75)
-    # count_extinctions[4] = Small spread population (files 76-100)
-    
+  
     # Loop through all 100 simulation sets (files)
     for(simulation_set in 1:100){
       # simulation_set = file number (equivalent to 'iter' in cluster code)
@@ -214,32 +200,35 @@
     print("Extinction proportions:")
     print(rate_of_extinction)
     
-   # Assign names that match cluster to the extinction rates for clarity in plotting and interpretation
-    names(rate_of_extinction) = c("Large 100 adults",   # condition 1
-                                  "Small 10 adults",     # condition 2
-                                  "Large 100 spread",    # condition 3
-                                  "Small 10 spread")     # condition 4
+    # Small adult (2), Small spread (4), Large adult (1), Large spread (3)
+    plot_data <- rate_of_extinction[c(2, 4, 1, 3)]
+    
+    # Assign names that match cluster to the extinction rates for clarity in plotting and interpretation
+    names(rate_of_extinction) = c("Small 10 adult",
+                                  "Small 10 spread",  
+                                  "Large 100 adult",    
+                                  "Large 100 spread")     
     
    # Create a bar plot to visualize the extinction rates for each condition
     png(filename="../results/question_5.png", width = 800, height = 500)
-    par(mar = c(9, 5, 4, 2))
+    par(mar = c(9, 5, 4, 2), family = "serif", las = 1)
     
-    barplot(rate_of_extinction,
+  bp  <-barplot(plot_data,
             ylab = "Proportion of Extinctions", 
             ylim = c(0, 0.20),
             main = "Proportion of Simulations Resulting in Extinction",
             las = 1,
             col = "palegreen4",
             border = "white",
-            names.arg = c("Large adult\n(100)",
-                          "Small adult\n(10)",
+            names.arg = c("Small adult \n(10)",
+                          "Small spread\n(10)",
                           "Large spread\n(100)",
-                          "Small spread\n(10)"),
+                          "Large adult\n(100)"),
             cex.names = 1.0,
             cex.axis = 1.1,
             cex.lab = 1.2,
             cex.main = 1.3)
-    
+    axis(side = 1, at = c(-1, max(bp) + 1), labels = FALSE, lwd = 1, pos = 0)
     mtext("Initial Condition", side = 1, line = 5, cex = 1.2)
     
     dev.off()
@@ -265,8 +254,6 @@
     
     return(written_explanation)
   }
-  # Run question 5
-  question_5()
   
   # Question 6
   question_6 <- function(){
@@ -342,23 +329,29 @@
     
     plot(0:120, deviation_large, type = "l", col = "blue", lwd = 2,
          ylim = y_range,
-         xlab = "Time Step (months)",
+         xlab = "Time Step ",
          ylab = "Deviation from Deterministic Model",
          main = "Deviation of Stochastic Model from Deterministic Model")
          
     lines(0:120, deviation_small, col = "red", lwd = 2)
+    
     abline(h = 1, lty = 2, col = "gray")
     
-    legend("topright", legend = c("Large Spread (100)", "Small Spread (10)"),
-           col = c("blue", "red"), lwd = 2)
+    # make the legend on the side with a box around it
+    legend("topright", 
+           legend = c("Large population (100)", "Small population (10)"), 
+           col = c("blue", "red"), 
+           lty = 1, 
+           lwd = 2, 
+           bty = "o",      # Box around it
+           bg = "white",   # Solid background so it doesn't overlap lines
+           cex = 0.8)      # Makes the whole legend smaller
     
     Sys.sleep(0.1)
     dev.off()
     
     return("The deterministic model approximates the stochastic model much better for large populations. Small populations experience greater demographic stochasticity, leading to larger deviations from deterministic predictions.")
   }
-  # Run question 6
-  question_6()
   
   # Section Two: Individual-based ecological neutral theory simulation 
   # creating two initial populations with different levels of diversity
@@ -373,9 +366,7 @@
       richness <- length(species_types)
       return(richness)
     }
-  # Test for question 7
-  community <- c(1, 4, 4, 5, 1, 6, 1)
-  species_richness(community)
+
   
   # Question 8
   init_community_max <- function(size){
@@ -383,10 +374,6 @@
     max_diversity <- 1:size
     return(max_diversity)
   }
-  # Test for question 8
-  size <- 10
-  init_community_max(size)
-  
 
   # Question 9
   init_community_min <- function(size){
@@ -394,9 +381,7 @@
     min_diversity <- rep(1, size)
     return(min_diversity)
   }
-  # Test for question 9
-  species_richness(init_community_min(6))
-  species_richness(init_community_max(7))
+
   
   # Question 10
   choose_two <- function(max_value){
@@ -404,10 +389,6 @@
     chosen_indices <- sample(1:max_value, size = 2, replace = FALSE)
     return(chosen_indices)
   }
-  
-  # Test for question 10
-  result <- choose_two(4)
-  print(result)
   
   # Question 11
   neutral_step <- function(community){
@@ -418,8 +399,6 @@
     community[selected_individuals[1]] <- community[selected_individuals[2]]
     return(community)
   }
-  # Test for question 11
-  neutral_step(c(1, 2))
   
   # Question 12
   # One generation = half the population dying (on average), not everyone dying.
@@ -434,9 +413,7 @@
     }
     return(community)
   }
-  # Test for question 12
-  neutral_generation(c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10))
-  
+
   # Question 13
   neutral_time_series <- function(community,duration)  {
     # Use a vector to store richness at each time point
@@ -451,13 +428,7 @@
     }
     return(richness_history)
   }
-  # Test for question 13
-  # Create a community with 5 unique individuals
-  community <- init_community_max(7)
-  # Generate a time series of 20 generations
-  time_series <- neutral_time_series(community, 20)
-  # Print the time series of species richness
-  print(time_series)
+ 
   
   # Question 14
   question_14 <- function() {
@@ -470,14 +441,12 @@
     # Plot parameters
     png(filename="../results/question_14.png", width = 600, height = 400)
     # Plotting results 
-    plot(richness_time_sim, type="l", main= "Neutral Model Simulation across 200 generations",xlab="Generation", ylab="Species Richness")
+    plot(richness_time_sim, type="l", main= "Neutral Model Simulation across 200 generations",xlab="Generation",xaxs = "i",xlim= c(0, 200),yaxs = "i",ylim= c(0, 100), ylab="Species Richness")
     dev.off()
     
     return("The initial state for the simulation is a maximally diverse community of 100 indivduals, over 200 hundred generations, the species richness declines as extinct indivduals are not being replaced and speciation or immigration is not occuring and the system trends towards fixation of a single species" )
   
   }
-  # Run question 14
-  question_14()
   
   # Question 15 (performs NM with speciation)
   # Replaces exactly one individual with likelihood of a speciation event
@@ -557,6 +526,7 @@
          ylim = c(0, 100), 
          main = "Neutral Model with Speciation across 200 Generations", 
          xlab = "Generation", 
+         xaxs = "i",
          ylab = "Species Richness")
     
     # Add min diversity simulation line
@@ -564,25 +534,22 @@
           col = "#D55E00",  # Colorblind-friendly orange/red
           lwd = 2)
     
-    # Add legend at the top without a box
-    legend("top", 
-           legend = c("Maximum diversity start (100 species)", 
-                      "Minimum diversity start (1 species)"), 
+    # Add legend at the right corner with a box around it
+    legend("topright", 
+           legend = c("Max Diversity Start", "Min Diversity Start"), 
            col = c("#0072B2", "#D55E00"), 
            lty = 1, 
            lwd = 2, 
-           horiz = TRUE, 
-           bty = "n")
+           bty = "o",      # Box around it
+           bg = "white",   # Solid background so it doesn't overlap lines
+           cex = 0.8)      # Makes the whole legend smaller
     
     dev.off()
-    # plot your graph here
     #Sys.sleep(0.1)
     
     return("The plot shows that neutral dynamics reach a stable equilibrium, regardless of intial coniditons over time. The maximum diversity scenario shows a reduction in species richness due to extinction events, while the minimum diversity scenario shows an increase in species richness due to speciation events. Both scenarios converge towards a similar equilibrium since the rate of speciation balances the rate of extinction over time in a neutral model.The equilibrium state is more dependent on community size, speciation rate and random drift rather than initial conditions. Larger communities mean that more species can coexist,while  higher speciation rates means more species are being maintained but stochastic processes are more key to the maintainence of biodiversity at an equilibrium level.")
   }
-  # Run question 18
-  question_18()
-  
+
   # Question 19
   species_abundance <- function(community)  {
     # Count how many indivs of each species
@@ -594,9 +561,6 @@
     # Return as a simple numeric vector
     return(as.vector(sorted_abundance))
   }
-  # Test for question 19
-  test_community <- c(1, 2, 2, 3, 3, 3, 4, 4, 4, 4)
-  species_abundance(test_community)  
   
   # Question 20
   octaves <- function(abundance_vector) {
@@ -617,9 +581,6 @@
     return(species_per_octave)
     
   }
-  # Test for question 20
-  test_abundance <- c(1, 1, 2, 3, 4, 5, 8, 10, 16)
-  octaves(test_abundance)
   
   # Question 21
   # Helper function
@@ -684,39 +645,55 @@
     
     # Plot 
     
-    png(filename = "../results/question_22.png", width = 1000, height = 500)
-    par(mfrow = c(1, 2), mar = c(5, 5, 4, 2))
+    # Plotting Parameters
+    png(filename = "../results/question_22.png", width = 1000, height = 500, res = 100)
     
-    barplot(mean_octaves_min,
-            main = "Species Abundance Distribution\n(Min Diversity Start)",
-            xlab = "Octave Class",
-            ylab = "Mean Number of Species",
-            col = "#D55E00",
-            border = "white",
-            ylim = c(0, max(c(mean_octaves_min, mean_octaves_max)) * 1.1),
-            cex.main = 1.1,
-            cex.lab = 1.0,
-            cex.axis = 0.95)
+    # Global academic styles: Serif font and horizontal y-axis labels
+    par(mfrow = c(1, 2), 
+        mar = c(5, 5, 4, 2), 
+        oma = c(0, 0, 2, 0),
+        family = "serif", 
+        las = 1)
     
+    # Determine global Y limit for perfect comparison
+    y_limit <- max(c(mean_octaves_min, mean_octaves_max), na.rm = TRUE) * 1.15
     
+    # 1. Min Diversity Plot
+    bp_min <- barplot(mean_octaves_min,
+                      main = "Min Diversity Start",
+                      xlab = "Abundance Class (Octave)",
+                      ylab = "Mean Number of Species",
+                      col = "#D55E00", # Academic orange
+                      border = "white",
+                      ylim = c(0, y_limit),
+                      axes = FALSE,    # Custom axis for L-frame
+                      cex.main = 1.3,
+                      yaxs = "i")      # Remove bottom gap
     
-    barplot(mean_octaves_max,
-            main = "Species Abundance Distribution\n(Max Diversity Start)",
-            xlab = "Octave Class",
-            ylab = "Mean Number of Species",
-            col = "#0072B2",
-            border = "white")
-            ylim = c(0, max(c(mean_octaves_min, mean_octaves_max)) * 1.1)
-            cex.main = 1.1
-            cex.lab = 1.0
-            cex.axis = 0.95
+    axis(side = 2, lwd = 1.5)          # Clean Y-axis
+    abline(h = 0, lwd = 1.5)           # Crisp X-axis baseline
     
+    # 2. Max Diversity Plot
+    bp_max <- barplot(mean_octaves_max,
+                      main = "Max Diversity Start",
+                      xlab = "Abundance Class (Octave)",
+                      ylab = "Mean Number of Species",
+                      col = "#0072B2", # Academic blue
+                      border = "white",
+                      ylim = c(0, y_limit),
+                      axes = FALSE,
+                      cex.main = 1.3,
+                      yaxs = "i")
+    
+    axis(side = 2, lwd = 1.5)
+    abline(h = 0, lwd = 1.5)
+    
+    # Figure-wide Title
+    mtext("Equilibrium Species Abundance Distributions", outer = TRUE, cex = 1.5, font = 2)
     dev.off()
     return("The high resemblance between both bar plots in both conditions show that initial conditions do not mainly contribute to the long-term species abundance distribution in a neutral model with speciation.Despite the strong variability between the sample size (i.e 1 vs 100), both distributions show a similar trend, with many rare epecies (shown as high bars in octaves 1-2) and progressively fewer common species(declining bars in higher octaves). This pattern can be explained as: when the neutral model with speciation reaches a dynamic equilibriumwhere the rate of speciation is balanced by the rate of random extinction events. The equilibrium abundance distribution relies mainly on the speciation rate (0.1), and community size (100), rather than the initialconditions. The burn-in period (warm-up time for simulation) of 200 generations was sufficient to observe a convergence and disregard the initial conditions for both scenarios. The plot supports the neutral theory:initial conditions are treated as transient, while the long-term state of equilibrium is maintained by ecological parameters.")
   }
-  # Run question 22
-  question_22()
-  
+
   # Question 23
   neutral_cluster_run <- function(speciation_rate, size, wall_time, interval_rich, interval_oct, burn_in_generations, output_file_name) {
       
@@ -770,12 +747,6 @@
     return(paste("Simulation complete:", generation, "generations in", 
                  round(actual_runtime_seconds, 2), "seconds"))
   }
-  
-  # Run question 23
-  # Test the function with specified parameters
-  neutral_cluster_run(speciation_rate = 0.1, size = 100, wall_time = 1, interval_rich = 1, interval_oct = 20, burn_in_generations = 200, output_file_name = "../results/my_test_file_1.rda")
-  # check the result
-  load(file = "../results/my_test_file_1.rda")
   
   # Questions 24 and 25 involve writing code elsewhere to run your simulations on
   # the cluster
@@ -863,91 +834,78 @@
     return(combined_results)
   }
   
-  # Run question 26
-  process_neutral_cluster_results()
-  
   plot_neutral_cluster_results <- function() {
-    
-    # Load the combined results for plotting
+    # Load the combined results
     load("../results/aa6725_neutral_combined.rda")
     
-    cat("Loaded combined_results\n")
-    cat("Size group names:", names(combined_results), "\n")
+    # Use a high-resolution PNG or PDF for academic quality
+    png(filename = "../results/plot_neutral_cluster_results.png", 
+        width = 1200, height = 900, res = 120) # Added 'res' for sharper text
     
-    # Plotting parameters
-    png(filename = "../results/plot_neutral_cluster_results.png", width = 1200, height = 900)
-    
+    # Global graphical parameters
     par(mfrow = c(2, 2),
-        mar   = c(6, 5, 4, 2),   # extra bottom margin for rotated labels
-        oma   = c(0, 0, 4, 0))
+        mar   = c(5, 5, 3, 2),   
+        oma   = c(2, 1, 5, 1),
+        family = "serif",        # Standard academic font
+        las    = 1)              # Horizontal axis labels for readability
     
-    colours <- c("500"  = "#0072B2",
-                 "1000" = "#D55E00",
-                 "2500" = "#009E73",
-                 "5000" = "#CC79A7")
+    colours <- c("500"  = "#0072B2", "1000" = "#D55E00", 
+                 "2500" = "#009E73", "5000" = "#CC79A7")
     
     for (size_name in c("500", "1000", "2500", "5000")) {
-      
       octave_data <- combined_results[[size_name]]
       
       if (is.null(octave_data) || length(octave_data) == 0) {
         plot.new()
-        text(0.5, 0.5, paste("No data for size", size_name), cex = 1.5)
+        text(0.5, 0.5, paste("No data for size", size_name), family = "serif")
         next
       }
       
-      # Per-panel y scale to prevent empty spaces for smaller sizes
       y_max <- max(octave_data, na.rm = TRUE)
-      
-      # Build x labels based on octave classes
       n_oct <- length(octave_data)
       lower <- 2^(0:(n_oct - 1))
       upper <- 2^(1:n_oct) - 1
-      oct_labels <- ifelse(lower == upper,
-                           as.character(lower),
-                           paste0(lower, "-", upper))
+      oct_labels <- ifelse(lower == upper, as.character(lower), paste0(lower, "-", upper))
       
-      # Plot the barplot for this size group
-      barplot(octave_data,
-              main      = paste("Community Size =", size_name),
-              xlab      = "",                        
-              ylab      = "Mean Number of Species",
-              col       = colours[size_name],
-              border    = "white",
-              ylim      = c(0, y_max * 1.15),
-              names.arg = oct_labels,
-              cex.main  = 1.3,
-              cex.lab   = 1.1,
-              cex.axis  = 1.0,
-              cex.names = 0.85,
-              las       = 2)                        
+      # Base Plot
+      # yaxs = "i" removes the gap at the bottom of the bars
+      bp <- barplot(octave_data,
+                    main      = paste("Community Size =", size_name),
+                    ylab      = "Mean Number of Species",
+                    col       = colours[size_name],
+                    border    = "white",         # Subtle bar separation
+                    ylim      = c(0, y_max * 1.1),
+                    names.arg = oct_labels,
+                    cex.main  = 1.4,
+                    cex.lab   = 1.2,
+                    cex.axis  = 1.0,
+                    cex.names = 0.8,
+                    las       = 2,               # Vertical x-labels
+                    axes = FALSE,              # Suppress default axes for custom styling
+                    yaxs      = "i",             # Internal axis style
+                    space     = 0.2)             # Consistent spacing
       
-      # X axis title placed manually to prevent overlapping titles
-      mtext("Abundance Class (individuals per species)",
-            side = 1, line = 4.5, cex = 0.9)
+      # Sharp Axis Lines (Academic 'L' frame)
+      abline(h = 0, lwd = 1.5, col = "black")
+      axis(side = 2, lwd = 1.5, pos = 0) # Ensures Y axis touches X axis
+      
+      mtext("Abundance Class (individuals)", side = 1, line = 4, cex = 0.9)
     }
     
-    mtext("Mean Species Abundance Distributions at Equilibrium (Neutral Model)",
-          outer = TRUE,
-          cex   = 1.4,
-          font  = 2,
-          line  = 1)
+    # Overall Figure Title
+    mtext("Equilibrium Species Abundance Distributions (Neutral Model)",
+          outer = TRUE, cex = 1.8, font = 2, line = 1.5, family = "serif")
     
     dev.off()
-    cat("Plot saved as plot_neutral_cluster_results.png\n")
-    
-    return(combined_results)
+    cat("High-resolution serif plot saved to ../results/plot_neutral_cluster_results.png\n")
   }
- 
-  # Run the plotting function
-  plot_neutral_cluster_results()
   
   # Challenge questions - these are substantially harder and worth fewer marks.
   # I suggest you only attempt these if you've done all the main questions. 
   
   # Challenge question A
 
-  Challenge_A <- function(output_file = "../data/processed_population_data.rda") {
+  compute_Challenge_A <- function(output_file = "../data/processed_population_data.rda") {
     cat("Starting data processing...\n")
     
   # A function to process all 100 cluster files and extract population size at 
@@ -1009,7 +967,7 @@
     return(output_file)
   }
   
-  plot_Challenge_A <- function(input_file = "../data/processed_population_data.rda") {
+  Challenge_A <- function(input_file = "../data/processed_population_data.rda") {
     library(ggplot2)
     
     if(!file.exists(input_file)) stop("Hand-over file not found! Run processing function first.")
@@ -1020,6 +978,7 @@
     cat("Generating plot (this may still take a moment due to 15,000 lines)...\n")
     png(filename = "../results/Challenge_A.png", width = 1000, height = 600)
     
+    
     p <- ggplot(population_size_df, 
                 aes(x = time_step, 
                     y = population_size, 
@@ -1027,274 +986,330 @@
                     colour = initial_condition)) +
       # Reduced alpha slightly for better visibility of 15,000 overlapping lines
       geom_line(alpha = 0.05) + 
+      
+      scale_y_continuous(expand = c(0, 0), limits = c(0, NA)) + 
+      scale_x_continuous(expand = c(0, 0)) +
+      
       labs(title = "15,000 Stochastic Population Simulations",
            subtitle = "Visualizing trends across different initial age distributions",
-           x = "Time Step (months)",
+           x = "Time Step",
            y = "Population Size",
            colour = "Initial Condition") +
-      theme_minimal() +
+      
+      # Cleaning up the theme
+      theme_classic() + # theme_classic() removes grid lines and grey background automatically
+      theme(
+        text = element_text(family = "serif"), # Use serif font for an academic journal feel
+        plot.title = element_text(face = "bold", size = 14),
+        axis.title = element_text(face = "bold"),
+        legend.position = "right",
+        legend.background = element_rect(fill = "white", color = "black", size = 0.2),
+        panel.grid.major = element_blank(), # Explicitly double-check grid removal
+        panel.grid.minor = element_blank()
+      ) +
       guides(colour = guide_legend(override.aes = list(alpha = 1))) # Make legend lines solid
     
-    print(p)
+    # Save with high resolution
+    ggsave("../results/Challenge_A.png", plot = p, width = 8, height = 5, dpi = 300)
     dev.off()
     
     cat("Plot saved to ../results/Challenge_A.png\n")
   }
-  
-  # Run Challenge A
-  Challenge_A()
-  
-  # Plot Challenge A results
-  plot_Challenge_A()
     
   # Challenge question B
-  Challenge_B <- function() {
-  
-  # A function to load sim results and compute the mean species
-  # richness and a 97.2% confidence interval for each time step,
-  # plot the results, to estimate 
-  
-  # Specify parameters
-  n_sim <- 100
-  n_gen <- 2000
-  speciation_rate <- 0.1
-  
-  # Preallocate matrices
-  richness_max <- matrix(0, nrow = n_gen, ncol = n_sim)
-  richness_min <- matrix(0, nrow = n_gen, ncol = n_sim)
-  
-  # Run simulations
-  
-  for (i in seq_len(n_sim)){
-    community_max <- init_community_max(100)
-    community_min <- init_community_min(100)
+  compute_Challenge_B <- function() {
+    n_sim <- 100
+    n_gen <- 2000
+    speciation_rate <- 0.1
     
-    for (t in seq_len(n_gen)) {
-      community_max <- neutral_generation_speciation(community_max, speciation_rate)
-      community_min <- neutral_generation_speciation(community_min, speciation_rate)
+    # Preallocate for n_gen + 1 to include Gen 0 (Total: 2001 rows)
+    richness_max <- matrix(0, nrow = n_gen + 1, ncol = n_sim)
+    richness_min <- matrix(0, nrow = n_gen + 1, ncol = n_sim)
+    
+    for (i in seq_len(n_sim)) {
+      community_max <- init_community_max(100)
+      community_min <- init_community_min(100)
       
-      richness_max[t, i] <- species_richness(community_max)
-      richness_min[t, i] <- species_richness(community_min)
+      # RECORD INITIAL STATE (Gen 0)
+      richness_max[1, i] <- species_richness(community_max)
+      richness_min[1, i] <- species_richness(community_min)
       
+      for (t in 1:n_gen) {
+        community_max <- neutral_generation_speciation(community_max, speciation_rate)
+        community_min <- neutral_generation_speciation(community_min, speciation_rate)
+        
+        # Store at index t + 1
+        richness_max[t + 1, i] <- species_richness(community_max)
+        richness_min[t + 1, i] <- species_richness(community_min)
+      }
+      if (i %% 10 == 0) cat("Completed simulation", i, "\n")
     }
-  }
+    save(richness_max, richness_min, file = "../data/processed_richness_data.rda")
+  }  
   
-  # Calculate mean and confidence intervals
-  mean_max <- rowMeans(richness_max)
-  mean_min <- rowMeans(richness_min)
-  
-  alpha <- 0.028
-  tcrit <- qt(1 - alpha/2, df = n_sim - 1)
-  
-  # Calculate standard error for confidence intervals
-  se_max <- apply(richness_max, 1, sd) / sqrt(n_sim) * tcrit
-  se_min <- apply(richness_min, 1, sd) / sqrt(n_sim) * tcrit
-  
-  # Plot results
-  png(filename="../results/Challenge_B_Plot.png", width = 600, height = 400)
-  
-  plot(mean_min, type = "l", col = "#0072B2",
-       lwd = 2,
-       ylim = c(0, 100),
-       xlab = "Generation", ylab = "Mean Species Richness",
-       main = "Neutral Model with Speciation:\nMean Richness over Time for Minimum Diversity Start"),
-       cex.main = 0.8  
-  
-  # Plot confidence intervals as dashed lines for Min     
-  lines(mean_min + se_min , col = "#0072B2", lty = 2)
-  lines(mean_min - se_min , col = "#0072B2", lty = 2)
-  
-  # Plot Max Line and CI
-  lines(mean_max, col = "#D55E00", lwd = 2)
-  lines(mean_max + se_max, col = "#D55E00", lty = 2)
-  lines(mean_max - se_max, col = "#D55E00", lty = 2)
-  
-  legend("topright",
-         legend = c("Min initial richness", "Max initial richness, 97.2% CI"),
-         col = c("#0072B2", "#D55E00"),lwd = 2, bty = "n")
-  
-  Sys.sleep(0.1)
-  dev.off()
-  }
-  # Run Challenge B
-  Challenge_B()
+  Challenge_B <- function() {
+    if(!file.exists("../data/processed_richness_data.rda")) {
+      stop("Run compute_Challenge_B() first.")
+    }
+    load("../data/processed_richness_data.rda")
+    
+    n_sim <- ncol(richness_max)
+    n_gen_plus_1 <- nrow(richness_max) # This is 2001
+    gens <- 0:(n_gen_plus_1 - 1)      # Creates sequence 0:2000
+    
+    mean_max <- rowMeans(richness_max)
+    mean_min <- rowMeans(richness_min)
+    tcrit <- qt(1 - 0.028/2, df = n_sim - 1)
+    
+    se_max <- apply(richness_max, 1, sd) / sqrt(n_sim) * tcrit
+    se_min <- apply(richness_min, 1, sd) / sqrt(n_sim) * tcrit
+    
+    png(filename="../results/Challenge_B_Plot.png", width = 800, height = 500, res = 100)
+    par(mar = c(5, 5, 4, 2), family = "serif", las = 1)
+    
+    # Initialize plot with L-frame (axes=FALSE)
+    plot(gens, mean_max, type = "n", ylim = c(0, 100), xaxs = "i", yaxs = "i",
+         xlab = "Generation", ylab = "Mean Species Richness",
+         main = "Neutral Model Convergence to Dynamic Equilibrium", axes = FALSE)
+    
+    # Custom crisp axes
+    axis(1, lwd = 1.2)
+    axis(2, lwd = 1.2)
+    abline(h = 0, lwd = 1.2) # Baseline
+    
+    # Plot Series
+    lines(gens, mean_min, col = "#0072B2", lwd = 2) # Min (Blue)
+    lines(gens, mean_min + se_min, col = "#0072B2", lty = 3)
+    lines(gens, mean_min - se_min, col = "#0072B2", lty = 3)
+    
+    lines(gens, mean_max, col = "#D55E00", lwd = 2) # Max (Orange)
+    lines(gens, mean_max + se_max, col = "#D55E00", lty = 3)
+    lines(gens, mean_max - se_max, col = "#D55E00", lty = 3)
+    
+    legend("topright", bty = "n", lwd = 2, lty = c(1, 1, 3),
+           legend = c("Max Initial Richness", "Min Initial Richness", "97.2% CI"),
+           col = c("#D55E00", "#0072B2", "darkgray"))
+    
+    dev.off()
+    
+    return("The system reaches dynamic equilibrium in approximately 200 generations, where richness stabilizes at a mean of ~25 species regardless of initial diversity.")
+  }  
   
   # Challenge question C
-  Challenge_C <- function() {
+  compute_Challenge_C <- function() {
+    # Parameters
+    community_size <- 100
+    speciation_rate <- 0.1
+    n_generations <- 200      # length of each simulation
+    n_reps <- 50             # replicates per starting richness
+    
+    richness_values <- 1:community_size
+    n_richness <- length(richness_values)
+    
+    # Pre-allocate matrix (row = initial richness, col = generation)
+    # We use n_generations + 1 to include Gen 0
+    mean_richness_matrix <- matrix(0, nrow = n_richness, ncol = n_generations + 1)
+    
+    cat("Running", n_richness, "richness levels x", n_reps, "replicates each...\n")
+    
+    for (richness_idx in seq_along(richness_values)) {
+      init_richness <- richness_values[richness_idx]
+      richness_sum <- numeric(n_generations + 1)
       
-      # Parameters
-      community_size <- 100
-      speciation_rate <- 0.1
-      n_generations <- 200      # how long to run each simulation
-      n_reps <- 50       # replicates per starting richness to average over
-      
-      # Store mean richness for each initial richness and generation
-      richness_values <- 1:community_size
-      n_richness <- length(richness_values)
-      
-      # Pre-allocate matrix, where row= initial richness, col = generation
-      mean_richness_matrix <- matrix(
-        data = 0,
-        nrow = n_richness,
-        ncol = n_generations + 1 
-        )
-
-      # Run simulations
-      cat("Running", n_richness, "richness levels x", n_reps, "replicates each...\n")
-      
-      for (richness_idx in seq_along(richness_values)) {
+      for (replicate_idx in 1:n_reps) {
+        # Create community with specific initial richness
+        community <- rep(x = 1:init_richness, length.out = community_size)
+        richness_sum[1] <- richness_sum[1] + species_richness(community)
         
-        init_richness <- richness_values[richness_idx]
-        
-        # Accumulate richness over replicates
-        richness_sum <- numeric(n_generations + 1)
-        
-        for (replicate_idx in 1:n_reps) {
-          # Create a community with the specified initial richness
-          community <- rep(x = 1:init_richness, length.out = community_size)
-          # Record richness at generation 0 (the starting state)
-          richness_sum[1] <- richness_sum[1] + species_richness(community)
-          
-          # Run through all generations, recording richness at each step
-          for (gen in 1:n_generations) {
-            community <- neutral_generation_speciation(community, speciation_rate)
-            richness_sum[gen + 1] <- richness_sum[gen + 1] + species_richness(community)
-          }
+        for (gen in 1:n_generations) {
+          community <- neutral_generation_speciation(community, speciation_rate)
+          richness_sum[gen + 1] <- richness_sum[gen + 1] + species_richness(community)
         }
-        
-        mean_richness_matrix[richness_idx, ] <- richness_sum / n_reps
-        
-  if (init_richness %% 10 == 0) {
-    cat("  Completed initial richness:", init_richness, "\n")
-  }
-  }
-      cat("Simulations complete! Plotting...\n")
-      
-      # Plot 
-      png(filename = "../results/Challenge_C.png", width = 900, height = 600)
-      par(mar = c(5, 5, 4, 8))
-      
-      # Set axis on empty plot to allow log scale and custom limits
-      plot(1:n_generations, mean_richness_matrix[1, -1],
-           log  = "x",
-           type = "n",
-           xlim = c(1, n_generations),
-           ylim = c(0, community_size),
-           xlab = "Generation",
-           ylab = "Mean Species Richness",
-           main = "Neutral Model: Averaged Time Series\nfor Different Initial Species Richnesses",
-           cex.main = 1.2,
-           cex.lab  = 1.1,
-           las  = 1)
-      
-      grid(col = "gray93", lty = 1)
-      
-      # Plotting; gradient from low (red) to high (blue) initial richness
-      #color_palette <- colorRampPalette(c("#D55E00", "#F0E442", "#0072B2"))(n_richness)
-      
-      # Draw all 100 lines in grey first (background)
-      for (richness_idx in seq_along(richness_values)) {
-        lines(1:n_generations,
-              mean_richness_matrix[richness_idx, -1],
-              col = "grey70",
-              lwd = 1.2)
       }
+      # Calculate mean across replicates for this initial richness level
+      mean_richness_matrix[richness_idx, ] <- richness_sum / n_reps
       
-      # Make lines for min and max diversity stand out in color and thickness
-      lines(1:n_generations, mean_richness_matrix[1,   -1], col = "#D55E00", lwd = 3)
-      lines(1:n_generations, mean_richness_matrix[100, -1], col = "#0072B2", lwd = 3)
-      
-      # Legend
-      legend("topright",
-             inset  = c(-0.15, 0),
-             legend = c("SR = 1 (minimum)", "SR = 100 (maximum)", "All others"),
-             col    = c("#D55E00", "#0072B2", "grey70"),
-             lty    = 1,
-             lwd    = c(3, 3, 1.2),
-             title  = "Initial\nRichness",
-             bty    = "n",
-             cex    = 0.85,
-             xpd    = TRUE)
-      
-      dev.off()
-      cat("Plot saved as ../results/Challenge_C.png\n")
-      
-      return(mean_richness_matrix)
+      if (init_richness %% 10 == 0) {
+        cat("  Completed initial richness:", init_richness, "\n")
+      }
+    }
+    
+    # Save the data for the plotting function
+    save(mean_richness_matrix, file = "../data/challenge_c_data.rda")
+    cat("Simulations complete! Data saved to ../data/challenge_c_data.rda\n")
   }
-  # Run Challenge C
-  Challenge_C()
   
-  # Challenge question D
-  Challenge_D <- function() {
+  Challenge_C <- function() {
+    # Check if data exists
+    if(!file.exists("../data/challenge_c_data.rda")) {
+      stop("Run compute_Challenge_C() first to generate the data.")
+    }
+    
+    # Load the matrix
+    load("../data/challenge_c_data.rda")
+    
+    n_richness <- nrow(mean_richness_matrix)
+    n_generations <- ncol(mean_richness_matrix) - 1 # subtracting 1 for Gen 0
+    community_size <- 100 # Adjust if you changed this in the compute function
+    
+    # Plot setup
+    png(filename = "../results/Challenge_C.png", width = 900, height = 600)
+    par(mar = c(5, 5, 4, 8), las = 1)
+    
+    # Set up the empty plot area (log scale for x-axis as per your original)
+    plot(1:n_generations, mean_richness_matrix[1, -1],
+         log  = "x",
+         type = "n",
+         xlim = c(1, n_generations),
+         ylim = c(0, community_size),
+         xlab = "Generation (Log Scale)",
+         ylab = "Mean Species Richness",
+         main = "Neutral Model: Averaged Time Series\nfor Different Initial Species Richnesses",
+         cex.main = 1.2,
+         cex.lab  = 1.1)
+    
+    grid(col = "gray93", lty = 1)
+    
+    # Draw all intermediate richness lines in grey
+    for (i in 1:n_richness) {
+      lines(1:n_generations, mean_richness_matrix[i, -1], col = "grey70", lwd = 1.2)
+    }
+    
+    # Highlight the boundaries (Min and Max initial richness)
+    lines(1:n_generations, mean_richness_matrix[1,   -1], col = "#D55E00", lwd = 3)
+    lines(1:n_generations, mean_richness_matrix[n_richness, -1], col = "#0072B2", lwd = 3)
+    
+    # Legend
+    legend("topright",
+           legend = c("Min initial richness", "Max initial richness"),
+           col = c("#D55E00", "#0072B2"),
+           lwd = 3,
+           bty = "o",
+           bg = "white",
+           cex = 0.9)
+    
+    dev.off()
+    cat("Plot saved as ../results/Challenge_C.png\n")
+    
+    return(mean_richness_matrix)
+  }
+ 
+   # Challenge question D
+  process_burn_in_data <- function(data_path = "../data/") {
     # This function processes the richness time series from multiple .rda files,
     # averages them by community size, and prepares the data for plotting.
-    data_path <- "../data/"
-    # Load necessary libraries
-    library(ggplot2)
-    # Define file groups for each community size
-    size_groups <- list(
-      "500"  = 1:25,
-      "1000" = 26:50,
-      "2500" = 51:75,
-      "5000" = 76:100
-    )
+    size_groups <- list("500"=1:25, "1000"=26:50, "2500"=51:75, "5000"=76:100)
+    results <- list()
     
-    # Initialize storage for accumulated richness and generation axes
-    accumulated_richness <- list("500"=NULL,"1000"=NULL,"2500"=NULL,"5000"=NULL)
-    generation_axis      <- list("500"=NULL,"1000"=NULL,"2500"=NULL,"5000"=NULL)
-    file_counts <- c("500"=0,"1000"=0,"2500"=0,"5000"=0)
+    # Vectorized rolling mean is significantly faster
+    fast_rolling_mean <- function(x, w = 20) as.numeric(stats::filter(x, rep(1/w, w), sides = 1))
     
-    # Loop through each size group and accumulate richness time series
-    for (size_name in names(size_groups)) {
+    for (sz in names(size_groups)) {
+      cat("Processing size:", sz, "\n")
+      valid_files <- 0
+      running_richness <- NULL
+      gen_axis <- NULL
       
-      cat("Processing size:", size_name, "\n")
-      
-      # Construct file name and check existence
-      for (index in size_groups[[size_name]]) {
-        file_name <- paste0(data_path, "aa6725_neutral_", index, ".rda")
+      for (idx in size_groups[[sz]]) {
+        f_name <- paste0(data_path, "aa6725_neutral_", idx, ".rda")
+        if (!file.exists(f_name)) next
         
-        if (!file.exists(file_name)) next
-        e <- new.env(parent = emptyenv())
-        load(file_name, envir = e)
+        e <- new.env()
+        load(f_name, envir = e)
         
-        # Calculate richness
-        richness_ts   <- e$richness_time_series
-        interval_rich <- e$interval_rich
+        if (is.null(e$richness_time_series)) next
         
-        # Check if richness time series is valid
-        if (is.null(richness_ts) || length(richness_ts) == 0) next
-        n_points <- length(richness_ts)
-        gens     <- seq(interval_rich, by = interval_rich, length.out = n_points)
-        
-        #
-        if (is.null(accumulated_richness[[size_name]])) {
-          accumulated_richness[[size_name]] <- richness_ts
-          generation_axis[[size_name]]      <- gens
+        if (is.null(running_richness)) {
+          running_richness <- e$richness_time_series
+          gen_axis <- seq(e$interval_rich, by = e$interval_rich, length.out = length(e$richness_time_series))
         } else {
-          accumulated_richness[[size_name]] <- sum_vect(accumulated_richness[[size_name]], richness_ts)
+          # Using a simple '+' if lengths match, or your sum_vect if they don't
+          running_richness <- running_richness + e$richness_time_series 
         }
-        file_counts[size_name] <- file_counts[size_name] + 1
+        valid_files <- valid_files + 1
       }
-      if (file_counts[size_name] > 0) {
-        accumulated_richness[[size_name]] <- accumulated_richness[[size_name]] / file_counts[size_name]
-        cat("  Size", size_name, ": averaged over", file_counts[size_name], "files\n")
+      
+      avg_richness <- running_richness / valid_files
+      
+      # Calculate Stability
+      smoothed <- fast_rolling_mean(avg_richness)
+      n <- length(smoothed)
+      final_mean <- mean(smoothed[max(1, floor(n * 0.9)):n], na.rm = TRUE)
+      threshold <- 0.02 * final_mean
+      
+      stable_gen <- NA
+      for (i in 1:(n - 1)) {
+        if (all(abs(smoothed[i:n] - final_mean) < threshold, na.rm = TRUE)) {
+          stable_gen <- gen_axis[i]
+          break
+        }
+      }
+      
+      results[[sz]] <- list(richness = avg_richness, gens = gen_axis, 
+                            stable_gen = stable_gen, smoothed = smoothed)
+    }
+    
+    save(results, file = paste0(data_path, "processed_burn_in_data.rda"))
+    cat("Processed data saved.\n")
+  }
+  
+  Challenge_D <- function(processed_file = "../data/processed_burn_in_data.rda") {
+    # This function processes the richness time series from multiple .rda files,
+    # averages them by community size, and prepares the data for plotting.
+    
+    if (!file.exists(processed_file)) stop("Run the processing script first!")
+    
+    load(processed_file) # Loads 'results'
+    
+    png(filename = "../results/Challenge_D.png", width = 1000, height = 650, res = 100)
+    par(mar = c(5, 5, 4, 10), las = 1)
+    
+    colours <- c("500"="#0072B2","1000"="#D55E00","2500"="#009E73","5000"="#CC79A7")
+    
+    # Find global limits for the plot
+    y_max <- max(sapply(results, function(x) max(x$richness, na.rm=TRUE)))
+    x_max <- max(sapply(results, function(x) max(x$gens, na.rm=TRUE)))
+    
+    plot(NULL, xlim = c(0, x_max), ylim = c(0, y_max * 1.1),
+         xlab = "Generation", ylab = "Mean Species Richness",
+         main = "Mean Species Richness During Burn-in by Community Size",
+         cex.main = 1.3, cex.lab = 1.1,xaxs = "i", yaxs = "i", axes = FALSE) 
+    
+    # Custom L-frame axes for cleaner look
+    axis(1, lwd = 1.2)
+    axis(2, lwd = 1.2)
+    abline(h = 0, lwd = 1.2)
+    abline(v = 0, lwd = 1.2)
+    
+    grid(nx = NULL, ny = 6, col = "grey90", lty = 1)
+    grid(nx = NULL, ny = 6, col = "grey90", lty = 1)
+    
+    for (sz in names(results)) {
+      dat <- results[[sz]]
+      
+      # Draw Raw (faint) and Smoothed (bold)
+      lines(dat$gens, dat$richness, col = adjustcolor(colours[sz], 0.2), lwd = 1)
+      lines(dat$gens, dat$smoothed, col = colours[sz], lwd = 2.5)
+      
+      # Vertical stabilization lines
+      if (!is.na(dat$stable_gen)) {
+        abline(v = dat$stable_gen, col = colours[sz], lty = 2, lwd = 1.5)
+        mtext(dat$stable_gen, side = 3, at = dat$stable_gen, col = colours[sz], cex = 0.8)
       }
     }
     
-    # Helper function: rolling mean with a specified window size 
-    # to smooth out the richness time series and detect stabilisation more robustly
-    rolling_mean <- function(x, window = 20) {
-      n <- length(x)
-      out <- numeric(n)
-      for (i in 1:n) {
-        lo <- max(1, i - window + 1)
-        out[i] <- mean(x[lo:i])
-      }
-      return(out)
-    }
+    # Primary Legend: Positioned in the right margin
+    legend("topleft", inset = c(1.02, 0), title = "Community Size",
+           legend = names(results), col = colours, lwd = 3, bty = "n", cex = 0.9)
+    
+    # Aesthetic Legend: Placed within the plot bottom-right
+    legend("bottomright", inset = c(0.02, 0.02), bty = "n", cex = 0.7,
+           legend = c("Raw richness", "Smoothed (w=20)", "Equilibrium"),
+           col = c("grey60", "grey30", "grey30"), lwd = c(1, 2.5, 1.5), lty = c(1, 1, 2))
+    
+    dev.off()
   }
-  # Run Challenge D
-  Challenge_D()
+
   
   Challenge_E <- function() {
     
